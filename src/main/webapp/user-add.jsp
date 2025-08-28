@@ -112,50 +112,36 @@
       <!-- Left navbar-header -->
       <div class="navbar-default sidebar" role="navigation">
         <div class="sidebar-nav navbar-collapse slimscrollsidebar">
-          <ul class="nav" id="side-menu">
-            <li style="padding: 10px 0 0">
-              <a href="index.html" class="waves-effect"
-                ><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i
-                ><span class="hide-menu">Dashboard</span></a
-              >
-            </li>
-            <li>
-              <a href="user-table.html" class="waves-effect"
-                ><i class="fa fa-user fa-fw" aria-hidden="true"></i
-                ><span class="hide-menu">Thành viên</span></a
-              >
-            </li>
-            <li>
-              <a href="role-table.html" class="waves-effect"
-                ><i class="fa fa-modx fa-fw" aria-hidden="true"></i
-                ><span class="hide-menu">Quyền</span></a
-              >
-            </li>
-            <li>
-              <a href="groupwork.html" class="waves-effect"
-                ><i class="fa fa-table fa-fw" aria-hidden="true"></i
-                ><span class="hide-menu">Dự án</span></a
-              >
-            </li>
-            <li>
-              <a href="task.html" class="waves-effect"
-                ><i class="fa fa-table fa-fw" aria-hidden="true"></i
-                ><span class="hide-menu">Công việc</span></a
-              >
-            </li>
-            <li>
-              <a href="blank.html" class="waves-effect"
-                ><i class="fa fa-columns fa-fw" aria-hidden="true"></i
-                ><span class="hide-menu">Blank Page</span></a
-              >
-            </li>
-            <li>
-              <a href="404.html" class="waves-effect"
-                ><i class="fa fa-info-circle fa-fw" aria-hidden="true"></i
-                ><span class="hide-menu">Error 404</span></a
-              >
-            </li>
-          </ul>
+         <ul class="nav" id="side-menu">
+                    <li style="padding: 10px 0 0;">
+                        <a href="${pageContext.request.contextPath}/" class="waves-effect"><i class="fa fa-clock-o fa-fw"
+                                aria-hidden="true"></i><span class="hide-menu">Dashboard</span></a>
+                    </li>
+                    <li>
+                        <a href="${pageContext.request.contextPath}/users" class="waves-effect active"><i class="fa fa-user fa-fw"
+                                aria-hidden="true"></i><span class="hide-menu">Thành viên</span></a>
+                    </li>
+                    <li>
+                        <a href="${pageContext.request.contextPath}/roles" class="waves-effect"><i class="fa fa-modx fa-fw"
+                                aria-hidden="true"></i><span class="hide-menu">Quyền</span></a>
+                    </li>
+                    <li>
+                        <a href="${pageContext.request.contextPath}/projects" class="waves-effect"><i class="fa fa-table fa-fw"
+                                aria-hidden="true"></i><span class="hide-menu">Dự án</span></a>
+                    </li>
+                    <li>
+                        <a href="${pageContext.request.contextPath}/tasks" class="waves-effect"><i class="fa fa-table fa-fw"
+                                aria-hidden="true"></i><span class="hide-menu">Công việc</span></a>
+                    </li>
+                    <li>
+                        <a href="${pageContext.request.contextPath}/blank" class="waves-effect"><i class="fa fa-columns fa-fw"
+                                aria-hidden="true"></i><span class="hide-menu">Blank Page</span></a>
+                    </li>
+                    <li>
+                        <a href="${pageContext.request.contextPath}/404" class="waves-effect"><i class="fa fa-info-circle fa-fw"
+                                aria-hidden="true"></i><span class="hide-menu">Error 404</span></a>
+                    </li>
+                </ul>
         </div>
       </div>
       <!-- Left navbar-header end -->
@@ -164,7 +150,13 @@
         <div class="container-fluid">
           <div class="row bg-title">
             <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-              <h4 class="page-title">Thêm mới thành viên</h4>
+              
+            <c:if test="${usersPage == 0}">
+				<h4 class="page-title">Thêm mới thành viên</h4>
+			</c:if>
+            <c:if test="${usersPage > 0}">
+				<h4 class="page-title">Sửa thành viên</h4>
+			</c:if>
             </div>
           </div>
           <!-- /.row -->
@@ -173,63 +165,86 @@
             <div class="col-md-2 col-12"></div>
             <div class="col-md-8 col-xs-12">
               <div class="white-box">
-                <form class="form-horizontal form-material">
+                <form class="form-horizontal form-material" method="post" action="">
                   <div class="form-group">
-                    <label class="col-md-12">Full Name</label>
+                    <label class="col-md-12" for="fullname">Full Name</label>
                     <div class="col-md-12">
                       <input
+                      	id="fullname"
+                      	name="fullname"
                         type="text"
                         placeholder="Johnathan Doe"
                         class="form-control form-control-line"
+                        required 
+                        value="${users.fullname }"
                       />
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="example-email" class="col-md-12">Email</label>
+                    <label for="example-email" class="col-md-12" for="email">Email</label>
                     <div class="col-md-12">
                       <input
                         type="email"
                         placeholder="johnathan@admin.com"
                         class="form-control form-control-line"
-                        name="example-email"
-                        id="example-email"
+                        name="email"
+                        id="email"
+                        required 
+                        value="${users.email }"
                       />
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="col-md-12">Password</label>
+                    <label class="col-md-12" for="password">Password</label>
                     <div class="col-md-12">
                       <input
+                      	name="password"
+                      	id="password"
                         type="password"
-                        value="password"
                         class="form-control form-control-line"
+                        required 
+                         minlength="6" 
+                         value="${users.password }"
                       />
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="col-md-12">Phone No</label>
+                    <label class="col-md-12" for="phone">Phone No</label>
                     <div class="col-md-12">
                       <input
+                      	id="phone"
+                      	name="phone"
                         type="text"
                         placeholder="123 456 7890"
                         class="form-control form-control-line"
+                        value="${users.phone }"
                       />
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="col-sm-12">Select Roles</label>
+                    <label class="col-sm-12" for="roles">Select Roles</label>
                     <div class="col-sm-12">
-                      <select class="form-control form-control-line">
-                        <option>Admin</option>
-                        <option>User</option>
+                      <select class="form-control form-control-line" id="roles" name="roles">
+	                      <c:forEach var = "i" items="${listRoles }">
+					        <option value="${i.id }" ${i.id == users.role_id ? 'selected' : ''} >${i.name }</option>
+					      </c:forEach>
                       </select>
                     </div>
                   </div>
                   <div class="form-group">
                     <div class="col-sm-12">
-                      <button type="submit" class="btn btn-success">
-                        Add User
-                      </button>
+                      
+                     <c:if test="${usersPage == 0}">
+							<button type="submit" class="btn btn-success">
+		                        Add User
+		                      </button>
+					</c:if>
+			           <c:if test="${usersPage > 0}">
+							<button type="submit" class="btn btn-success">
+		                        Edit User
+		                     </button>
+					</c:if>
+                      
                       <a href="user-table.html" class="btn btn-primary"
                         >Quay lại</a
                       >

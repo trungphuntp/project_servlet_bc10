@@ -29,6 +29,7 @@ public class UsersRepository {
 				users.setFullname(resultSet.getString("fullname"));
 				users.setRole_id(resultSet.getInt("role_id"));
 				users.setRole_desc(resultSet.getString("description"));
+				users.setPhone(resultSet.getString("phone"));
 				listUsers.add(users);
 			}
 			
@@ -39,7 +40,92 @@ public class UsersRepository {
 		return listUsers;
 	}
 	
-	public void name() {
-//		String query = ""
+	public int insertUser(String fullname, String email, String password, String phone, int rolesId) {
+		String query = "INSERT INTO users( email, password,fullname, avatar,role_id,phone )\r\n"
+				+ "VALUES (? , ?, ?, ?, ?, ?);";
+		int rowCount = 0;
+		Connection connection = MySQLConfig.getConnection();
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, email);
+			preparedStatement.setString(2, password);
+			preparedStatement.setString(3, fullname);
+			preparedStatement.setString(4, "");
+			preparedStatement.setInt(5, rolesId);
+			preparedStatement.setString(6, phone);
+			rowCount = preparedStatement.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("UsersRepository : " +  e.getMessage());
+		}
+		
+		return rowCount;
+	}
+	
+	public int deleteUser(int id) {
+		String query = "DELETE FROM users s\r\n"
+				+ "WHERE s.id = ?;";
+		int rowCount = 0;
+		Connection connection = MySQLConfig.getConnection();
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, id);
+			 
+			rowCount = preparedStatement.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("UsersRepository : " +  e.getMessage());
+		}
+		
+		
+		return rowCount;
+	}
+	
+	public Users findUsersById(int id) {
+		String query = "SELECT * FROM users u WHERE u.id = ?; \r\n";
+		Users users = new Users();
+		Connection connection = MySQLConfig.getConnection();
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, id);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			while (resultSet.next()) {
+				users.setId(resultSet.getInt("id"));
+				users.setEmail(resultSet.getString("email"));
+				users.setPassword(resultSet.getString("password"));
+				users.setFullname(resultSet.getString("fullname"));
+				users.setRole_id(resultSet.getInt("role_id"));
+				users.setPhone(resultSet.getString("phone"));
+			}
+		} catch (Exception e) {
+			System.out.println("UsersRepository : " +  e.getMessage());
+		}
+		return users;
+	}
+	
+	public int updateUser(String fullname, String email, String password, String phone, int roleId, int idEdit) {
+		int rowCount = 0;
+		String query = "UPDATE users\r\n"
+				+ "SET email = ? ,\r\n"
+				+ "    password = ?,\r\n"
+				+ "    fullname = ?,\r\n"
+				+ "    role_id = ?,\r\n"
+				+ "    phone = ?\r\n"
+				+ "WHERE id = ?;";
+		Connection connection = MySQLConfig.getConnection();
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, email);
+			preparedStatement.setString(2, password);
+			preparedStatement.setString(3, fullname);
+			preparedStatement.setInt(4, roleId);
+			preparedStatement.setString(5, phone);
+			preparedStatement.setInt(6, idEdit);
+			rowCount = preparedStatement.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("UsersRepository : " +  e.getMessage());
+		}
+		
+		
+		return rowCount;
 	}
 }

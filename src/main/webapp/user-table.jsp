@@ -130,7 +130,7 @@
                         <h4 class="page-title">Danh sách thành viên</h4>
                     </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 text-right">
-                        <a href="user-add.html" class="btn btn-sm btn-success">Thêm mới</a>
+                        <a href="${pageContext.request.contextPath}/user-add" class="btn btn-sm btn-success">Thêm mới</a>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -143,8 +143,8 @@
                                     <thead>
                                         <tr>
                                             <th>STT</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
+                                            <th>FullName</th>
+                                            <th>Phone</th>
                                             <th>Username</th>
                                             <th>Role</th>
                                             <th>#</th>
@@ -156,13 +156,13 @@
 									         <tr>
 	                                            <td>${i.id}</td>
 	                                            <td>${i.fullname }</td>
-	                                            <td>${i.fullname }</td>
+	                                            <td>${i.phone }</td>
 	                                            <td>${i.email }</td>
 	                                            <td>${i.role_desc }</td>
 	                                            <td>
-	                                                <a href="#" class="btn btn-sm btn-primary">Sửa</a>
-	                                                <a href="#" class="btn btn-sm btn-danger">Xóa</a>
-	                                                <a href="user-details.html" class="btn btn-sm btn-info">Xem</a>
+	                                                <a href="${pageContext.request.contextPath}/user-edit?id-edit=${i.id}" class="btn btn-sm btn-primary">Sửa</a>
+	                                                <a href="${pageContext.request.contextPath}/user-delete?id-delete=${i.id}" class="btn btn-sm btn-danger">Xóa</a>
+	                                                <a href="${pageContext.request.contextPath}/user-detail" class="btn btn-sm btn-info">Xem</a>
 	                                            </td>
 	                                        </tr>
 									    </c:forEach>

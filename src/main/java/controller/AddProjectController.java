@@ -16,7 +16,7 @@ import services.ProjectsServices;
 
 @WebServlet(name="AddProjectController", urlPatterns = {"/project-add", "/project-edit"})
 public class AddProjectController extends HttpServlet{
-	ProjectsServices projectsServices = new ProjectsServices();
+	private ProjectsServices projectsServices = new ProjectsServices();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -38,10 +38,11 @@ public class AddProjectController extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String nameProject = req.getParameter("nameProject").trim();
+		String startDate = req.getParameter("startDate").trim();
+		String endDate = req.getParameter("endDate").trim();
+		
 		if (req.getServletPath().equals("/project-add")) {
-			String nameProject = req.getParameter("nameProject").trim();
-			String startDate = req.getParameter("startDate").trim();
-			String endDate = req.getParameter("endDate").trim();
 			if (!nameProject.isEmpty() && !startDate.isEmpty()) {
 				Date startDateSql = null;
 				Date endDateSql = null;
@@ -54,9 +55,6 @@ public class AddProjectController extends HttpServlet{
 		}
 		
 		if (req.getServletPath().equals("/project-edit")) {
-			String nameProject = req.getParameter("nameProject").trim();
-			String startDate = req.getParameter("startDate").trim();
-			String endDate = req.getParameter("endDate").trim();
 			int idEdit = Integer.parseInt(req.getParameter("id-edit"));
 			
 			if (!nameProject.isEmpty() && !startDate.isEmpty()) {

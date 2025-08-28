@@ -36,16 +36,15 @@ public class AddRoleController extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String nameRole = req.getParameter("nameRole").trim();
+		String desc = req.getParameter("desc").trim();
+		
 		if (req.getServletPath().equals("/role-add") ) {
-			String nameRole = req.getParameter("nameRole").trim();
-			String desc = req.getParameter("desc").trim();
 			rolesServices.addRole(nameRole, desc);
 			
 		}
 		
 		if (req.getServletPath().equals("/role-edit")) {
-			String nameRole = req.getParameter("nameRole").trim();
-			String desc = req.getParameter("desc").trim();
 			int idEdit = Integer.parseInt(req.getParameter("id-edit").trim());
 			rolesServices.editRole(nameRole, desc, idEdit);
 		}

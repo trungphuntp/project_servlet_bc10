@@ -12,7 +12,7 @@ import services.ProjectsServices;
 
 @WebServlet(name = "DeleteProjectController", urlPatterns = "/project-delete")
 public class DeleteProjectController extends HttpServlet{
-	ProjectsServices projectsServices = new ProjectsServices();
+	private ProjectsServices projectsServices = new ProjectsServices();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int idDelete = Integer.parseInt(req.getParameter("id-delete"));
