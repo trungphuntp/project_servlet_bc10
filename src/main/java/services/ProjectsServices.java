@@ -19,4 +19,12 @@ public class ProjectsServices {
 	public int removeProject(int id) {
 		return projectsRepository.deleteProject(id);
 	}
+	
+	public Projects findProjectById(int id) {
+		return projectsRepository.findProject(id);
+	}
+	
+	public int editProjectById(String name,Date start,Date end, int  id) {
+		return projectsRepository.updateProjectById(name, start, end, id);
+	}
 }

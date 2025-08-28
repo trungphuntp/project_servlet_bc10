@@ -125,7 +125,12 @@
             <div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Thêm mới dự án</h4>
+                        <c:if test="${pageProject == 0}">
+                        	<h4 class="page-title">Thêm mới dự án</h4>
+						</c:if>
+                        <c:if test="${pageProject > 0}">
+                        	<h4 class="page-title">Sửa dự án</h4>
+						</c:if>
                     </div>
                 </div>
                 <!-- /.row -->
@@ -138,24 +143,27 @@
                                 <div class="form-group">
                                     <label class="col-md-12" for="nameProject">Tên dự án</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="Tên công việc" name="nameProject"
+                                        <input type="text" placeholder="Tên công việc" name="nameProject" value="${projects.getName() }"
                                            id="nameProject" class="form-control form-control-line"> </div>
                                 </div>
                                 <div class="form-group" for="startDate">
                                     <label class="col-md-12">Ngày bắt đầu</label>
                                     <div class="col-md-12">
                                         <input type="date" placeholder="dd/MM/yyyy" id="startDate" name="startDate"
+                                        value="${projects.getDateStart()}"
                                             class="form-control form-control-line"> </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-12" for="endDate">Ngày kết thúc</label>
                                     <div class="col-md-12">
                                         <input type="date" placeholder="dd/MM/yyyy" id="endDate" name="endDate"
+                                         value="${projects.getDateEnd()}"
                                             class="form-control form-control-line"> </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-12">
                                         <button type="submit" class="btn btn-success">Lưu lại</button>
+                                        
                                         <a href="${pageContext.request.contextPath}/projects" class="btn btn-primary">Quay lại</a>
                                     </div>
                                 </div>

@@ -156,10 +156,10 @@
                                 <div class="form-group">
                                     <div class="col-sm-12">
                                        	<c:if test="${pageRole == 0}">
-										    <button type="submit" class="btn btn-success">Add Role</button>
+										    <button type="submit" class="btn btn-success">Thêm quyền</button>
 										</c:if>
                                        	<c:if test="${pageRole > 0}">
-										    <button type="submit" class="btn btn-success">Edit Role</button>
+										    <button type="submit" class="btn btn-success">sửa quyền</button>
 										</c:if>
                                         <a href="${pageContext.request.contextPath}/roles" class="btn btn-primary">Quay lại</a>
                                     </div>

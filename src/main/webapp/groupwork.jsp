@@ -157,7 +157,7 @@
                                             <td>${i.getDateDDMMYYYY(i.dateStart) }</td>
                                             <td>${i.getDateDDMMYYYY(i.dateEnd) }</td>
                                             <td>
-                                                <a href="#" class="btn btn-sm btn-primary">Sửa</a>
+                                                <a href="${pageContext.request.contextPath}/project-edit?id-edit=${i.id}" class="btn btn-sm btn-primary">Sửa</a>
                                                 <a href="${pageContext.request.contextPath}/project-delete?id-delete=${i.id}" class="btn btn-sm btn-danger">Xóa</a>
                                                 <a href="${pageContext.request.contextPath}/project-detail" class="btn btn-sm btn-info">Xem</a>
                                             </td>

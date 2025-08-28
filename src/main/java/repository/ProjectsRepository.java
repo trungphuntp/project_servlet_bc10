@@ -73,4 +73,48 @@ public class ProjectsRepository {
 		
 		return rowCount;
 	}
+	
+	public Projects findProject(int id) {
+		String query = "SELECT * FROM jobs j WHERE j.id = ?;";
+		Projects projects = new Projects();
+		Connection connection = MySQLConfig.getConnection();
+		
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, id);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			while (resultSet.next()) {
+				projects.setId(resultSet.getInt("id"));
+				projects.setName(resultSet.getString("name"));
+				projects.setDateStart(resultSet.getDate("start_date"));
+				projects.setDateEnd(resultSet.getDate("end_date"));
+			}
+			
+		} catch (Exception e) {
+			System.out.println("ProjectsRepository : " + e.getMessage());
+		}
+		
+		return projects;
+	}
+	
+	public int updateProjectById(String name, Date startDate, Date endDate, int id) {
+		int rowCount = 0;
+		String query = "UPDATE jobs j\r\n"
+				+ "SET name = ?, start_date= ?, end_date = ?\r\n"
+				+ "WHERE j.id = ?;";
+		Connection connection = MySQLConfig.getConnection();
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, name);
+			preparedStatement.setDate(2, startDate);
+			preparedStatement.setDate(3, endDate);
+			preparedStatement.setInt(4, id);
+			rowCount = preparedStatement.executeUpdate();
+		}	catch (Exception e) {
+			System.out.println("ProjectsRepository : " + e.getMessage());
+		}
+		
+		return rowCount;
+	}
 }
