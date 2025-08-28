@@ -118,8 +118,11 @@ public class Tasks {
 
 	public String getDateDDMMYYYY(Date date) {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		String formatted = sdf.format(date);
-		return formatted;
+		if (date != null ) {
+			String formatted = sdf.format(date);
+			return formatted;
+		} 
+		return null;
 	}
 
 }

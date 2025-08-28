@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import entity.Users;
 import services.UsersServices;
 
-@WebServlet(name="UsersTableController", urlPatterns = {"/user-table"})
+@WebServlet(name="UsersTableController", urlPatterns = {"/users"})
 
 public class UsersTableController extends HttpServlet {
 	private UsersServices usersServices = new UsersServices();

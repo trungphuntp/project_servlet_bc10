@@ -87,33 +87,33 @@
         <!-- Left navbar-header -->
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse slimscrollsidebar">
-                <ul class="nav" id="side-menu">
+                 <ul class="nav" id="side-menu">
                     <li style="padding: 10px 0 0;">
-                        <a href="index.html" class="waves-effect"><i class="fa fa-clock-o fa-fw"
+                        <a href="${pageContext.request.contextPath}/" class="waves-effect"><i class="fa fa-clock-o fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Dashboard</span></a>
                     </li>
                     <li>
-                        <a href="user-table.html" class="waves-effect"><i class="fa fa-user fa-fw"
+                        <a href="${pageContext.request.contextPath}/users" class="waves-effect"><i class="fa fa-user fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Thành viên</span></a>
                     </li>
                     <li>
-                        <a href="role-table.html" class="waves-effect"><i class="fa fa-modx fa-fw"
+                        <a href="${pageContext.request.contextPath}/roles" class="waves-effect active"><i class="fa fa-modx fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Quyền</span></a>
                     </li>
                     <li>
-                        <a href="groupwork.html" class="waves-effect"><i class="fa fa-table fa-fw"
+                        <a href="${pageContext.request.contextPath}/projects" class="waves-effect"><i class="fa fa-table fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Dự án</span></a>
                     </li>
                     <li>
-                        <a href="task.html" class="waves-effect"><i class="fa fa-table fa-fw"
+                        <a href="${pageContext.request.contextPath}/tasks" class="waves-effect"><i class="fa fa-table fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Công việc</span></a>
                     </li>
                     <li>
-                        <a href="blank.html" class="waves-effect"><i class="fa fa-columns fa-fw"
+                        <a href="${pageContext.request.contextPath}/blank" class="waves-effect"><i class="fa fa-columns fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Blank Page</span></a>
                     </li>
                     <li>
-                        <a href="404.html" class="waves-effect"><i class="fa fa-info-circle fa-fw"
+                        <a href="${pageContext.request.contextPath}/404" class="waves-effect"><i class="fa fa-info-circle fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Error 404</span></a>
                     </li>
                 </ul>
@@ -124,8 +124,13 @@
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="row bg-title">
-                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Thêm mới quyền</h4>
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">             
+                        <c:if test="${pageRole == 0}">
+							<h4 class="page-title">Thêm mới quyền</h4>
+						</c:if>
+                        <c:if test="${pageRole > 0}">
+							<h4 class="page-title">Sửa quyền</h4>
+						</c:if>
                     </div>
                 </div>
                 <!-- /.row -->
@@ -134,24 +139,29 @@
                     <div class="col-md-2 col-12"></div>
                     <div class="col-md-8 col-xs-12">
                         <div class="white-box">
-                            <form class="form-horizontal form-material">
+                            <form class="form-horizontal form-material" method="post" action="">
                                 <div class="form-group">
-                                    <label class="col-md-12">Tên quyền</label>
+                                    <label class="col-md-12" for="nameRole">Tên quyền</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="Tên quyền"
+                                        <input type="text" id="nameRole" name="nameRole" placeholder="Tên quyền" value="${nameEdit}"
                                             class="form-control form-control-line" />
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-12">Mô tả</label>
+                                    <label class="col-md-12" for="desc">Mô tả</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="Mô tả" class="form-control form-control-line" />
+                                        <input type="text" id="desc" name="desc" placeholder="Mô tả"  value="${descEdit}" class="form-control form-control-line" />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-12">
-                                        <button type="submit" class="btn btn-success">Add Role</button>
-                                        <a href="role-table.html" class="btn btn-primary">Quay lại</a>
+                                       	<c:if test="${pageRole == 0}">
+										    <button type="submit" class="btn btn-success">Add Role</button>
+										</c:if>
+                                       	<c:if test="${pageRole > 0}">
+										    <button type="submit" class="btn btn-success">Edit Role</button>
+										</c:if>
+                                        <a href="${pageContext.request.contextPath}/roles" class="btn btn-primary">Quay lại</a>
                                     </div>
                                 </div>
                             </form>

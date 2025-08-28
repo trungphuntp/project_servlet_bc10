@@ -6,8 +6,8 @@ import java.text.SimpleDateFormat;
 public class Projects {
 	private int id;
 	private String name;
-	private Date dateStart;
-	private Date dateEnd;
+	private Date dateStart = null;
+	private Date dateEnd = null;
 	
 	
 	
@@ -56,8 +56,11 @@ public class Projects {
 	
 	public String getDateDDMMYYYY(Date date) {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		String formatted = sdf.format(date);
-		return formatted;
+		if (date != null ) {
+			String formatted = sdf.format(date);
+			return formatted;
+		} 
+		return null;
 	}
 	
 }

@@ -10,4 +10,20 @@ public class RolesServices {
 	public List<Roles> getAllRoles() {
 		return rolesRepository.findAllRoles();
 	}
+	
+	public int addRole(String name, String desc) {
+		return rolesRepository.insertRole(name, desc);
+	}
+	
+	public int removeRoleById(int id) {
+		return rolesRepository.deleteRole(id);
+	}
+	
+	public int editRole(String name, String desc, int id) {
+		return rolesRepository.updateRole(name, desc, id);
+	}
+	
+	public Roles findRoleById(int id) {
+		return rolesRepository.findRoleById(id);
+	}
 }
