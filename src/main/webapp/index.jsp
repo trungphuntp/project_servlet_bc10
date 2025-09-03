@@ -49,7 +49,7 @@
                     <i class="fa fa-bars"></i>
                 </a>
                 <div class="top-left-part">
-                    <a class="logo" href="index.html">
+                    <a class="logo" href="${pageContext.request.contextPath}/">
                         <b>
                             <img src="plugins/images/pixeladmin-logo.png" alt="home" />
                         </b>
@@ -73,7 +73,7 @@
                         <div class="dropdown">
                              <c:if test = "${isLogin}">
 						          <a class="profile-pic dropdown-toggle" data-toggle="dropdown" href="#"> 
-                                    <img src="${!userCurrent.getAvatar().isEmpty() ? userCurrent.getAvatar() : 'plugins/images/users/varun.jpg' }" alt="user-img" width="36" class="img-circle" />
+                                    <img src="${!userCurrent.getAvatar().isEmpty() ? userCurrent.getAvatar() : 'plugins/images/users/default-avatar.jpg' }" alt="user-img" width="36" class="img-circle" />
                                     <b class="hidden-xs">${!userCurrent.getFullname().isEmpty() ? userCurrent.getFullname() : 'Người dùng'}</b> 
                                 </a>
                                 <ul class="dropdown-menu">
@@ -99,6 +99,7 @@
             <!-- /.navbar-top-links -->
             <!-- /.navbar-static-side -->
         </nav>
+        
         <!-- Left navbar-header -->
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse slimscrollsidebar">

@@ -13,8 +13,13 @@ public class TasksServices {
 		return taskRepository.findAllTasks();
 	}
 	
-	public int addTask(String nameTask, int jobId, int userId, Date startDate, Date endDate) {
-		return taskRepository.insertTask(nameTask, jobId, userId, startDate, endDate);
+	public int addTask(String nameTask, int jobId, int userId, String startDate, String endDate) {
+		Date startDateSql = Date.valueOf(startDate);
+		Date endDateSql = null;
+		if (!endDate.isEmpty()) {
+			endDateSql = Date.valueOf(endDate);
+		}
+		return taskRepository.insertTask(nameTask, jobId, userId, startDateSql, endDateSql);
 	}
 	
 	public int deleteTask(int id) {
@@ -25,8 +30,21 @@ public class TasksServices {
 		return taskRepository.findTaskById(id);
 	}
 	
-	public int editTask(String name, Date startDate, Date endDate, int userId, int jobId,int statusId, int editIdt) {
-		return taskRepository.updateTaskById(name, startDate, endDate, userId, jobId, statusId, editIdt);
+	public int editTask(String name, String startDate, String endDate, int userId, int jobId,int statusId, int editIdt) {
+		Date startDateSql = Date.valueOf(startDate);
+		Date endDateSql = null;
+		if (!endDate.isEmpty()) {
+			endDateSql = Date.valueOf(endDate);
+		}
+		return taskRepository.updateTaskById(name, startDateSql, endDateSql, userId, jobId, statusId, editIdt);
+	}
+	
+	public List<Tasks> getTaskByIdUser(int id) {
+		return taskRepository.findTaskByIdUser(id);
+	}
+	
+	public Tasks getTaskByIdAndIdUser(int id, int idUser) {
+		return .taskRepository.findTaskByIdAndIdUser(id, idUser);
 	}
 	
 }

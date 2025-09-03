@@ -12,8 +12,14 @@ public class ProjectsServices {
 		return projectsRepository.findAllProjects();	
 	}
 	
-	public int addProject(String name, Date start, Date end) {
-		return projectsRepository.insertProject(name, start, end);
+	public int addProject(String name, String start, String end) {
+		Date startDateSql = null;
+		Date endDateSql = null;
+		startDateSql =  Date.valueOf(start);
+		if (!end.isEmpty()) {
+			endDateSql =  Date.valueOf(end);
+		}
+		return projectsRepository.insertProject(name, startDateSql, endDateSql);
 	}
 	
 	public int removeProject(int id) {
@@ -24,7 +30,13 @@ public class ProjectsServices {
 		return projectsRepository.findProject(id);
 	}
 	
-	public int editProjectById(String name,Date start,Date end, int  id) {
-		return projectsRepository.updateProjectById(name, start, end, id);
+	public int editProjectById(String name,String start,String end, int  id) {
+		Date startDateSql = null;
+		Date endDateSql = null;
+		startDateSql =  Date.valueOf(start);
+		if (!end.isEmpty()) {
+			endDateSql =  Date.valueOf(end);
+		}
+		return projectsRepository.updateProjectById(name, startDateSql, endDateSql, id);
 	}
 }

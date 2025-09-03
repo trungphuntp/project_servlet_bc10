@@ -23,8 +23,8 @@ public class UsersServices {
 		return usersRepository.findUsersById(id);
 	}
 	
-	public Users getUsersAbsolute(int id, String email, String password) {
-		return usersRepository.findUsersAbsolute(id, email, password);
+	public Users getUsersByIdEmailPassword(int id, String email, String password) {
+		return usersRepository.findUsersByIdEmailPassword(id, email, password);
 	}
 	
 	public int editUser(String fullname, String email, String password, String phone, int roleId, int idEdit) {

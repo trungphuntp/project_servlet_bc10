@@ -23,7 +23,13 @@ public class AddProjectController extends HttpServlet{
 		int isEdit = 0;
 		if (req.getServletPath().equals("/project-edit")) {
 			isEdit = 1;
-			int idEdit = Integer.parseInt(req.getParameter("id-edit"));
+			int idEdit = 0;
+			try {
+				idEdit = Integer.parseInt(req.getParameter("id-edit"));
+			} catch (Exception e) {
+				System.out.println("AddProjectController : " + e.getMessage());
+			}
+			
 			Projects projects = projectsServices.findProjectById(idEdit);
 		
 			
@@ -38,34 +44,28 @@ public class AddProjectController extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String nameProject = req.getParameter("nameProject").trim();
-		String startDate = req.getParameter("startDate").trim();
-		String endDate = req.getParameter("endDate").trim();
+		String nameProject = "";
+		String startDate = "";
+		String endDate = "";
+		
+		try {
+			 nameProject = req.getParameter("nameProject").trim();
+			 startDate = req.getParameter("startDate").trim();
+			 endDate = req.getParameter("endDate").trim();
+		} catch (Exception e) {
+			System.out.println("AddProjectController : " + e.getMessage());
+		}
 		
 		if (req.getServletPath().equals("/project-add")) {
 			if (!nameProject.isEmpty() && !startDate.isEmpty()) {
-				Date startDateSql = null;
-				Date endDateSql = null;
-				startDateSql =  Date.valueOf(startDate);
-				if (!endDate.isEmpty()) {
-					endDateSql =  Date.valueOf(endDate);
-				}
-			projectsServices.addProject(nameProject, startDateSql, endDateSql);	
+			projectsServices.addProject(nameProject, startDate, endDate);	
 			}
 		}
-		
 		if (req.getServletPath().equals("/project-edit")) {
 			int idEdit = Integer.parseInt(req.getParameter("id-edit"));
-			
 			if (!nameProject.isEmpty() && !startDate.isEmpty()) {
 				if (idEdit > 0) {
-					Date startDateSql = null;
-					Date endDateSql = null;
-					startDateSql =  Date.valueOf(startDate);
-					if (!endDate.isEmpty()) {
-						endDateSql =  Date.valueOf(endDate);
-					}
-					projectsServices.editProjectById(nameProject, startDateSql, endDateSql, idEdit);
+					projectsServices.editProjectById(nameProject, startDate, endDate, idEdit);
 				}
 			}
 		}

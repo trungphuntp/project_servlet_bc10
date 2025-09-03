@@ -16,7 +16,12 @@ public class DeleteRoleController extends HttpServlet{
 	private RolesServices rolesServices = new RolesServices();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		int idDelete = Integer.parseInt(req.getParameter("delete-id").trim());
+		int idDelete = 0;
+		try {
+			 idDelete = Integer.parseInt(req.getParameter("delete-id").trim());
+		} catch (Exception e) {
+			System.out.println("DeleteRoleController : " + e.getMessage());
+		}
 		if (idDelete != 0) {
 			rolesServices.removeRoleById(idDelete);
 			resp.sendRedirect(req.getContextPath() + "/roles");

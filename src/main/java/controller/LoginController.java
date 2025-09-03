@@ -33,7 +33,6 @@ public class LoginController extends HttpServlet{
 				isRemember = cookie.getValue();
 			}
 		}
-		System.out.println(isRemember);
 		if (!isRemember.isEmpty()) {
 			req.setAttribute("email", email);
 			req.setAttribute("password", password);
@@ -44,9 +43,18 @@ public class LoginController extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String email = req.getParameter("email").toLowerCase().trim();
-		String password = req.getParameter("password");
-		String remember = req.getParameter("remember");
+		String email = "";
+		String password = "";
+		String remember = "";
+		
+		try {
+			 email = req.getParameter("email").toLowerCase().trim();
+			 password = req.getParameter("password");
+			 remember = req.getParameter("remember");
+			
+		} catch (Exception e) {
+			System.out.println("LoginController : " + e.getMessage());
+		}
 		
 		List<Users> listUsers = authenticationRepository.checkUserAccount(email, password, remember, req , resp);
 		if (!listUsers.isEmpty()) {

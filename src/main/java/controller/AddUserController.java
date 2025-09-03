@@ -26,7 +26,12 @@ public class AddUserController extends HttpServlet{
 
 		if (req.getServletPath().equals("/user-edit")) {
 			isEdit=1;
-			int idEdit = Integer.parseInt(req.getParameter("id-edit"));
+			int idEdit = 0;
+			try {
+			 idEdit = Integer.parseInt(req.getParameter("id-edit"));
+			} catch (Exception e) {
+				System.out.println("AddUserController : " + e.getMessage());
+			}
 			Users users = usersServices.getUsersById(idEdit);
 			req.setAttribute("users", users);
 		}
@@ -40,11 +45,21 @@ public class AddUserController extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String fullname = req.getParameter("fullname");
-		String email = req.getParameter("email");
-		String password = req.getParameter("password");
-		String phone = req.getParameter("phone");
-		int role = Integer.parseInt(req.getParameter("roles"));
+		String fullname = "";
+		String email = "";
+		String password = "";
+		String phone = "";
+		int role = 0;
+		
+		try {
+			 fullname = req.getParameter("fullname");
+			 email = req.getParameter("email");
+			 password = req.getParameter("password");
+			 phone = req.getParameter("phone");
+			 role = Integer.parseInt(req.getParameter("roles"));
+		} catch (Exception e) {
+			System.out.println("AddUserController : " + e.getMessage());
+		}
 		
 		if (req.getServletPath().equals("/user-add")) {
 			if (!fullname.isEmpty() && !email.isEmpty() && !password.isEmpty() ) {
@@ -52,7 +67,12 @@ public class AddUserController extends HttpServlet{
 			}
 		}
 		if (req.getServletPath().equals("/user-edit")) {
-			int idEdit = Integer.parseInt(req.getParameter("id-edit"));
+			int idEdit = 0;
+			try {
+				idEdit = Integer.parseInt(req.getParameter("id-edit"));
+			} catch (Exception e) {
+				System.out.println("AddUserController : " + e.getMessage());
+			}
 			usersServices.editUser(fullname, email, password, phone, role, idEdit);
 		}
 		

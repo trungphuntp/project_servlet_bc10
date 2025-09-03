@@ -34,7 +34,13 @@ public class AddTaskController extends HttpServlet{
 		
 		if (req.getServletPath().equals("/task-edit")) {
 			isEdit = 1;
-			int idEdit = Integer.parseInt(req.getParameter("id-edit"));
+			
+			int idEdit = 0;
+			try {
+			 idEdit = Integer.parseInt(req.getParameter("id-edit"));
+			} catch (Exception e) {
+				System.out.println("AddTaskController : " + e.getMessage());
+			}
 			Tasks taskEdit = tasksServices.getTaskById(idEdit);
 			req.setAttribute("taskEdit", taskEdit);
 		}
@@ -50,44 +56,45 @@ public class AddTaskController extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		int projectId = Integer.parseInt(req.getParameter("project").trim());
-		String nameTask = req.getParameter("nameTask").trim();
-		int userId = Integer.parseInt(req.getParameter("user").trim());
-		String startDate = req.getParameter("startDate");
-		String endDate = req.getParameter("endDate");
+		int projectId = 0;
+		String nameTask = "";
+		int userId = 0;
+		String startDate =  "";
+		String endDate = "";
+		try {
+			 projectId = Integer.parseInt(req.getParameter("project").trim());
+			 nameTask = req.getParameter("nameTask").trim();
+			 userId = Integer.parseInt(req.getParameter("user").trim());
+			 startDate = req.getParameter("startDate");
+			 endDate = req.getParameter("endDate");
+		} catch (Exception e) {
+			System.out.println("AddTaskController : " + e.getMessage());
+		}
 		
 		if (req.getServletPath().equals("/task-add")) {
 			if (!nameTask.isEmpty() && !startDate.isEmpty() && projectId != 0 && userId != 0) {
-				Date startDateSql = Date.valueOf(startDate);
-				Date endDateSql = null;
-				if (!endDate.isEmpty()) {
-					endDateSql = Date.valueOf(endDate);
-				}
-				tasksServices.addTask(nameTask, projectId, userId, startDateSql, endDateSql);
+				tasksServices.addTask(nameTask, projectId, userId, startDate, endDate);
 				resp.sendRedirect(req.getContextPath()+"/tasks");
 				return;
 			}
 		}
 		if (req.getServletPath().equals("/task-edit")) {
 			if (!nameTask.isEmpty() && !startDate.isEmpty() && projectId != 0 && userId != 0) {
-				Date startDateSql = Date.valueOf(startDate);
-				Date endDateSql = null;
-				if (!endDate.isEmpty()) {
-					endDateSql = Date.valueOf(endDate);
+				int idEdit = 0;
+				int statusId = 0;
+				try {
+					 idEdit = Integer.parseInt(req.getParameter("id-edit"));
+					 statusId = Integer.parseInt(req.getParameter("statusId"));
+				} catch (Exception e) {
+					System.out.println("AddTaskController : " + e.getMessage());
 				}
-				int idEdit = Integer.parseInt(req.getParameter("id-edit"));
-				int statusId = Integer.parseInt(req.getParameter("statusId"));
 				if (idEdit != 0 && statusId != 0) {
-					tasksServices.editTask(nameTask, startDateSql, endDateSql, userId, projectId, statusId, idEdit);
+					tasksServices.editTask(nameTask, startDate, endDate, userId, projectId, statusId, idEdit);
 					resp.sendRedirect(req.getContextPath()+"/tasks");
 					return;
 				}
 			}
 		}
-		
-		
-
-		
 		req.getRequestDispatcher("/task-add.jsp").forward(req, resp);
 	}
 }

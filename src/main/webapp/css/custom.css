@@ -40,3 +40,10 @@
     font-weight: 600;
     color: black;
 }
+
+@media ( max-width : 768px) {
+	.navbar .dropdown-menu {
+		right: 0 !important;
+		left: initial !important;
+	}
+}

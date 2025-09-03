@@ -16,11 +16,9 @@ public class LogoutUsersController extends HttpServlet{
 		Cookie[] listCookie = req.getCookies();
 		if (listCookie != null) {
 			for (Cookie cookie : listCookie) {
-			 	System.out.println(cookie.getName());
 		        cookie.setValue("");     
 		        cookie.setMaxAge(0);      
 		        resp.addCookie(cookie);
-		       
 			}
 		}
 		

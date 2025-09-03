@@ -39,13 +39,12 @@
     <div id="wrapper">
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top m-b-0">
-            <div class="navbar-header">
-                <a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)" data-toggle="collapse"
-                    data-target=".navbar-collapse">
+            <div class="navbar-header"> 
+                <a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse">
                     <i class="fa fa-bars"></i>
                 </a>
                 <div class="top-left-part">
-                    <a class="logo" href="index.html">
+                    <a class="logo" href="${pageContext.request.contextPath}/">
                         <b>
                             <img src="plugins/images/pixeladmin-logo.png" alt="home" />
                         </b>
@@ -57,7 +56,7 @@
                 <ul class="nav navbar-top-links navbar-left m-l-20 hidden-xs">
                     <li>
                         <form role="search" class="app-search hidden-xs">
-                            <input type="text" placeholder="Search..." class="form-control">
+                            <input type="text" placeholder="Search..." class="form-control"> 
                             <a href="">
                                 <i class="fa fa-search"></i>
                             </a>
@@ -67,17 +66,26 @@
                 <ul class="nav navbar-top-links navbar-right pull-right">
                     <li>
                         <div class="dropdown">
-                            <a class="profile-pic dropdown-toggle" data-toggle="dropdown" href="#">
-                                <img src="plugins/images/users/varun.jpg" alt="user-img" width="36"
-                                    class="img-circle" />
-                                <b class="hidden-xs">Cybersoft</b>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="profile.html">Thông tin cá nhân</a></li>
-                                <li><a href="#">Thống kê công việc</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Đăng xuất</a></li>
-                            </ul>
+                             <c:if test = "${isLogin}">
+						          <a class="profile-pic dropdown-toggle" data-toggle="dropdown" href="#"> 
+                                    <img src="${!userCurrent.getAvatar().isEmpty() ? userCurrent.getAvatar() : 'plugins/images/users/default-avatar.jpg' }" alt="user-img" width="36" class="img-circle" />
+                                    <b class="hidden-xs">${!userCurrent.getFullname().isEmpty() ? userCurrent.getFullname() : 'Người dùng'}</b> 
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="${pageContext.request.contextPath}/profile">Thông tin cá nhân</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="${pageContext.request.contextPath}/logout">Đăng xuất</a></li>
+                                </ul>
+						      </c:if>
+						      <c:if test = "${!isLogin}">
+						          <a class="profile-pic dropdown-toggle" data-toggle="dropdown" href="#"> 
+                                    <img src="plugins/images/users/default-avatar.jpg" alt="user-img" width="36" class="img-circle" />
+                                    <b class="hidden-xs">Người dùng</b> 
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="${pageContext.request.contextPath}/login">Đăng nhập</a></li>
+                                </ul>
+						      </c:if>
                         </div>
                     </li>
                 </ul>
@@ -91,31 +99,31 @@
             <div class="sidebar-nav navbar-collapse slimscrollsidebar">
                 <ul class="nav" id="side-menu">
                     <li style="padding: 10px 0 0;">
-                        <a href="index.html" class="waves-effect"><i class="fa fa-clock-o fa-fw"
+                        <a href="${pageContext.request.contextPath}/" class="waves-effect active"><i class="fa fa-clock-o fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Dashboard</span></a>
                     </li>
                     <li>
-                        <a href="user-table.html" class="waves-effect"><i class="fa fa-user fa-fw"
+                        <a href="${pageContext.request.contextPath}/users" class="waves-effect"><i class="fa fa-user fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Thành viên</span></a>
                     </li>
                     <li>
-                        <a href="role-table.html" class="waves-effect"><i class="fa fa-modx fa-fw"
+                        <a href="${pageContext.request.contextPath}/roles" class="waves-effect"><i class="fa fa-modx fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Quyền</span></a>
                     </li>
                     <li>
-                        <a href="groupwork.html" class="waves-effect"><i class="fa fa-table fa-fw"
+                        <a href="${pageContext.request.contextPath}/projects" class="waves-effect"><i class="fa fa-table fa-fw"
+                                aria-hidden="true"></i><span class="hide-menu">Dự án</span></a>
+                    </li>
+                    <li>
+                        <a href="${pageContext.request.contextPath}/tasks" class="waves-effect"><i class="fa fa-table fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Công việc</span></a>
                     </li>
                     <li>
-                        <a href="task.html" class="waves-effect"><i class="fa fa-table fa-fw"
-                                aria-hidden="true"></i><span class="hide-menu">Công việc</span></a>
-                    </li>
-                    <li>
-                        <a href="blank.html" class="waves-effect"><i class="fa fa-columns fa-fw"
+                        <a href="${pageContext.request.contextPath}/blank" class="waves-effect"><i class="fa fa-columns fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Blank Page</span></a>
                     </li>
                     <li>
-                        <a href="404.html" class="waves-effect"><i class="fa fa-info-circle fa-fw"
+                        <a href="${pageContext.request.contextPath}/404" class="waves-effect"><i class="fa fa-info-circle fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Error 404</span></a>
                     </li>
                 </ul>
@@ -138,35 +146,35 @@
                         <div class="white-box">
                             <form class="form-horizontal form-material">
                                 <div class="form-group">
-                                    <label class="col-md-12">Tên dự án</label>
+                                    <label class="col-md-12" for="nameJob">Tên dự án</label>
                                     <div class="col-md-12">
-                                        <input type="text" readonly value="Dự án CRM" class="form-control form-control-line">
+                                        <input type="text" readonly value="" name="nameJob" id="nameJob" class="form-control form-control-line">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-12">Tên công việc</label>
+                                    <label class="col-md-12" for="nameTask">Tên công việc</label>
                                     <div class="col-md-12">
-                                        <input type="text" readonly value="Thiết kế database" class="form-control form-control-line">
+                                        <input type="text" readonly name="nameTask" id="nameTask" value="" class="form-control form-control-line">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-12">Ngày bắt đầu</label>
+                                    <label class="col-md-12" for="startDate">Ngày bắt đầu</label>
                                     <div class="col-md-12">
-                                        <input type="text" readonly value="05-07/2020" class="form-control form-control-line"> 
+                                        <input type="text" readonly value="" name="startDate" id="startDate" class="form-control form-control-line"> 
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-12">Ngày kết thúc</label>
+                                    <label class="col-md-12" for="endDate">Ngày kết thúc</label>
                                     <div class="col-md-12">
-                                        <input type="text" readonly value="17-07/2020" class="form-control form-control-line"> 
+                                        <input type="text" readonly value="17-07/2020" id="endDate" name="endDate" class="form-control form-control-line"> 
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-12">Trạng thái</label>
+                                    <label class="col-md-12" for="status">Trạng thái</label>
                                     <div class="col-md-12">
-                                        <select class="form-control form-control-line">
+                                        <select class="form-control form-control-line" name="status" id="status">
                                             <option>Chưa thực hiện</option>
-                                            <option selected>Đang thực hiện</option>
+                                            <option>Đang thực hiện</option>
                                             <option>Đã hoàn thành</option>
                                         </select>
                                     </div>

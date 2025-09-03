@@ -103,7 +103,7 @@ public class UsersRepository {
 		return users;
 	}
 	
-	public Users findUsersAbsolute(int id, String email, String password) {
+	public Users findUsersByIdEmailPassword(int id, String email, String password) {
 		String query = "SELECT * FROM users u WHERE u.email= ? AND u.password= ? AND u.id = ?";
 		Users users = new Users();
 		Connection connection = MySQLConfig.getConnection();

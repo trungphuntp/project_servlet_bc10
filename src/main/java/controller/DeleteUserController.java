@@ -15,7 +15,14 @@ public class DeleteUserController extends HttpServlet{
 	private UsersServices usersServices = new UsersServices();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		int deleteId = Integer.parseInt(req.getParameter("id-delete"));
+		int deleteId = 0;
+		try {
+		 deleteId = Integer.parseInt(req.getParameter("id-delete"));
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("DeleteUserController : " + e.getMessage());
+		}
 		if (deleteId > 0) {
 			usersServices.removeUser(deleteId);
 			resp.sendRedirect(req.getContextPath()+"/users");

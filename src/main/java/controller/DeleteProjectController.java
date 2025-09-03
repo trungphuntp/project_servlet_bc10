@@ -15,7 +15,12 @@ public class DeleteProjectController extends HttpServlet{
 	private ProjectsServices projectsServices = new ProjectsServices();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		int idDelete = Integer.parseInt(req.getParameter("id-delete"));
+		int idDelete = 0;
+		try {
+		idDelete = Integer.parseInt(req.getParameter("id-delete"));
+		} catch (Exception e) {
+			System.out.println("DeleteProjectController : " + e.getMessage());
+		}
 		if (idDelete > 0) {
 			projectsServices.removeProject(idDelete);
 			resp.sendRedirect(req.getContextPath()+"/projects");

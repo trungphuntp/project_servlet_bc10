@@ -50,10 +50,8 @@ public class AllPageFilter implements Filter {
 		if (!email.isEmpty() && !password.isEmpty() && idUser != 0) {
 			isLogin = true;
 			req.setAttribute("isLogin", isLogin);
-			user = usersServices.getUsersAbsolute(idUser, email, password);
+			user = usersServices.getUsersByIdEmailPassword(idUser, email, password);
 		}
-
-
 		req.setAttribute("userCurrent", user);
 		
 		chain.doFilter(request, response);

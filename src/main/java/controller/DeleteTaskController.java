@@ -15,7 +15,12 @@ public class DeleteTaskController extends HttpServlet{
 	private TasksServices tasksServices = new TasksServices();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		int deleteId = Integer.parseInt(req.getParameter("id-delete"));
+		int deleteId = 0;
+		try {		
+			 deleteId = Integer.parseInt(req.getParameter("id-delete"));
+		} catch (Exception e) {
+			System.out.println("DeleteTaskController : " + e.getMessage());
+		}
 		if (deleteId != 0) {
 			tasksServices.deleteTask(deleteId);
 			resp.sendRedirect(req.getContextPath() + "/tasks");

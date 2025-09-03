@@ -19,7 +19,12 @@ public class AddRoleController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {	
 		int isEdit = 0;
 		if (req.getServletPath().equals("/role-edit")) {
-			int idEdit = Integer.parseInt(req.getParameter("id-edit").trim());
+			int idEdit = 0;
+			try {
+				 idEdit = Integer.parseInt(req.getParameter("id-edit"));
+			} catch (Exception e) {
+				System.out.println("AddRoleController : " + e.getMessage());
+			}
 			Roles rolesEdit = rolesServices.findRoleById(idEdit);
 			String name = rolesEdit.getName();
 			String desc = rolesEdit.getDesc();
@@ -36,8 +41,15 @@ public class AddRoleController extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String nameRole = req.getParameter("nameRole").trim();
-		String desc = req.getParameter("desc").trim();
+		String nameRole = "";
+		String desc = "";
+		
+		try {
+			 nameRole = req.getParameter("nameRole").trim();
+			 desc = req.getParameter("desc").trim();
+		} catch (Exception e) {
+			System.out.println("AddRoleController : " + e.getMessage());
+		}
 		
 		if (req.getServletPath().equals("/role-add") ) {
 			rolesServices.addRole(nameRole, desc);
@@ -45,7 +57,12 @@ public class AddRoleController extends HttpServlet {
 		}
 		
 		if (req.getServletPath().equals("/role-edit")) {
-			int idEdit = Integer.parseInt(req.getParameter("id-edit").trim());
+			int idEdit = 0;
+			try {
+				 idEdit = Integer.parseInt(req.getParameter("id-edit").trim());
+			} catch (Exception e) {
+				System.out.println("AddRoleController : " + e.getMessage());
+			}
 			rolesServices.editRole(nameRole, desc, idEdit);
 		}
 		
