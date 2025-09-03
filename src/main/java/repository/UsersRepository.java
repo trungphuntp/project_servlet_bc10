@@ -30,6 +30,7 @@ public class UsersRepository {
 				users.setRole_id(resultSet.getInt("role_id"));
 				users.setRole_desc(resultSet.getString("description"));
 				users.setPhone(resultSet.getString("phone"));
+				users.setAvatar(resultSet.getString("avatar"));
 				listUsers.add(users);
 			}
 			
@@ -99,6 +100,34 @@ public class UsersRepository {
 		} catch (Exception e) {
 			System.out.println("UsersRepository : " +  e.getMessage());
 		}
+		return users;
+	}
+	
+	public Users findUsersAbsolute(int id, String email, String password) {
+		String query = "SELECT * FROM users u WHERE u.email= ? AND u.password= ? AND u.id = ?";
+		Users users = new Users();
+		Connection connection = MySQLConfig.getConnection();
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			
+			preparedStatement.setString(1, email);
+			preparedStatement.setString(2, password);
+			preparedStatement.setInt(3, id);
+			
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				users.setId(resultSet.getInt("id"));
+				users.setEmail(resultSet.getString("email"));
+				users.setPassword(resultSet.getString("password"));
+				users.setFullname(resultSet.getString("fullname"));
+				users.setRole_id(resultSet.getInt("role_id"));
+				users.setPhone(resultSet.getString("phone"));
+				users.setAvatar(resultSet.getString("avatar"));
+			}
+		} catch (Exception e) {
+			System.out.println("UsersRepository : " +  e.getMessage());
+		}
+		
 		return users;
 	}
 	

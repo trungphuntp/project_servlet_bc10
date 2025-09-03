@@ -19,8 +19,12 @@ public class UsersServices {
 		return usersRepository.deleteUser(id);
 	}
 	
-	public Users findUsersById(int id) {
+	public Users getUsersById(int id) {
 		return usersRepository.findUsersById(id);
+	}
+	
+	public Users getUsersAbsolute(int id, String email, String password) {
+		return usersRepository.findUsersAbsolute(id, email, password);
 	}
 	
 	public int editUser(String fullname, String email, String password, String phone, int roleId, int idEdit) {

@@ -34,8 +34,6 @@ public class AuthenticationRepository {
 				
 				listUsers.add(users);
 			}
-			
-
 		} catch (Exception e) {
 			System.out.println("LoginRepository : " + e.getMessage());
 		}

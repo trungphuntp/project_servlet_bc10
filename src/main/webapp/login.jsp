@@ -17,7 +17,7 @@
     <div class="col-md-5 m-auto mt-5">
       <h3 class="text-center">ĐĂNG NHẬP HỆ THỐNG</h3>
       <div class="p-4 border mt-4">
-        <form action="${pageContext.request.contextPath}" method="post">
+        <form method="post" action = "">
             <div class="form-group">
               <label for="email">Email</label>
               <input type="email" class="form-control" name="email" id="email" value=${email }>

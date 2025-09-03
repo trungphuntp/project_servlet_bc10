@@ -17,19 +17,19 @@ public class AddRoleController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {	
-		int pageRole = 0;
+		int isEdit = 0;
 		if (req.getServletPath().equals("/role-edit")) {
 			int idEdit = Integer.parseInt(req.getParameter("id-edit").trim());
 			Roles rolesEdit = rolesServices.findRoleById(idEdit);
 			String name = rolesEdit.getName();
 			String desc = rolesEdit.getDesc();
-			pageRole = 1;
+			isEdit = 1;
 	
 			req.setAttribute("nameEdit", name);
 			req.setAttribute("descEdit", desc);
 		}
 		
-		req.setAttribute("pageRole", pageRole);
+		req.setAttribute("isEdit", isEdit);
 		req.getRequestDispatcher("/role-add.jsp").forward(req, resp);
 	}
 	

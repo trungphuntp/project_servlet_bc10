@@ -71,16 +71,26 @@
                 <ul class="nav navbar-top-links navbar-right pull-right">
                     <li>
                         <div class="dropdown">
-                            <a class="profile-pic dropdown-toggle" data-toggle="dropdown" href="#"> 
-                                <img src="plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle" />
-                                <b class="hidden-xs">Cybersoft</b> 
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="profile.html">Thông tin cá nhân</a></li>
-                                <li><a href="#">Thống kê công việc</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Đăng xuất</a></li>
-                            </ul>
+                             <c:if test = "${isLogin}">
+						          <a class="profile-pic dropdown-toggle" data-toggle="dropdown" href="#"> 
+                                    <img src="${!userCurrent.getAvatar().isEmpty() ? userCurrent.getAvatar() : 'plugins/images/users/varun.jpg' }" alt="user-img" width="36" class="img-circle" />
+                                    <b class="hidden-xs">${!userCurrent.getFullname().isEmpty() ? userCurrent.getFullname() : 'Người dùng'}</b> 
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="${pageContext.request.contextPath}/profile">Thông tin cá nhân</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="${pageContext.request.contextPath}/logout">Đăng xuất</a></li>
+                                </ul>
+						      </c:if>
+						      <c:if test = "${!isLogin}">
+						          <a class="profile-pic dropdown-toggle" data-toggle="dropdown" href="#"> 
+                                    <img src="plugins/images/users/default-avatar.jpg" alt="user-img" width="36" class="img-circle" />
+                                    <b class="hidden-xs">Người dùng</b> 
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="${pageContext.request.contextPath}/login">Đăng nhập</a></li>
+                                </ul>
+						      </c:if>
                         </div>
                     </li>
                 </ul>

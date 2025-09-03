@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entity.Users;
 import services.AuthenticationServices;
 
 @WebServlet(name="LoginController", urlPatterns = {"/login"})
@@ -19,6 +21,7 @@ public class LoginController extends HttpServlet{
 		Cookie[] listCookie = req.getCookies();
 		String email = "";
 		String password = "";
+		String isRemember = "";
 		for (Cookie cookie : listCookie) {
 			if (cookie.getName().equals("email")) {
 				email = cookie.getValue();
@@ -26,8 +29,12 @@ public class LoginController extends HttpServlet{
 			if (cookie.getName().equals("password")) {
 				password = cookie.getValue();
 			}
+			if (cookie.getName().equals("isRemember")) {
+				isRemember = cookie.getValue();
+			}
 		}
-		if (!email.isEmpty() && !password.isEmpty()) {
+		System.out.println(isRemember);
+		if (!isRemember.isEmpty()) {
 			req.setAttribute("email", email);
 			req.setAttribute("password", password);
 		}
@@ -40,8 +47,13 @@ public class LoginController extends HttpServlet{
 		String email = req.getParameter("email").toLowerCase().trim();
 		String password = req.getParameter("password");
 		String remember = req.getParameter("remember");
-		authenticationRepository.checkUserAccount(email, password, remember, req , resp);
-		resp.sendRedirect(req.getContextPath() + "/login");
 		
+		List<Users> listUsers = authenticationRepository.checkUserAccount(email, password, remember, req , resp);
+		if (!listUsers.isEmpty()) {
+			resp.sendRedirect(req.getContextPath() + "/");
+			return;
+		}
+
+		resp.sendRedirect(req.getContextPath() + "/login");
 	}
 }

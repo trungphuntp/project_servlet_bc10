@@ -20,9 +20,9 @@ public class AddProjectController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		int pageProject = 0;
+		int isEdit = 0;
 		if (req.getServletPath().equals("/project-edit")) {
-			pageProject = 1;
+			isEdit = 1;
 			int idEdit = Integer.parseInt(req.getParameter("id-edit"));
 			Projects projects = projectsServices.findProjectById(idEdit);
 		
@@ -32,7 +32,7 @@ public class AddProjectController extends HttpServlet{
 			}
 		}
 		
-		req.setAttribute("pageProject", pageProject);
+		req.setAttribute("isEdit", isEdit);
 		req.getRequestDispatcher("/groupwork-add.jsp").forward(req, resp);
 	}
 	

@@ -21,20 +21,20 @@ public class AddUserController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		int usersPage = 0;
+		int isEdit = 0;
 		
 
 		if (req.getServletPath().equals("/user-edit")) {
-			usersPage=1;
+			isEdit=1;
 			int idEdit = Integer.parseInt(req.getParameter("id-edit"));
-			Users users = usersServices.findUsersById(idEdit);
+			Users users = usersServices.getUsersById(idEdit);
 			req.setAttribute("users", users);
 		}
 
 		
 		List<Roles> listRoles = rolesServices.getAllRoles();
 		req.setAttribute("listRoles", listRoles);
-		req.setAttribute("usersPage", usersPage);
+		req.setAttribute("isEdit", isEdit);
 		req.getRequestDispatcher("user-add.jsp").forward(req, resp);
 	}
 	

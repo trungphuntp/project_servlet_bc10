@@ -125,10 +125,10 @@
             <div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">             
-                        <c:if test="${pageRole == 0}">
+                        <c:if test="${isEdit == 0}">
 							<h4 class="page-title">Thêm mới quyền</h4>
 						</c:if>
-                        <c:if test="${pageRole > 0}">
+                        <c:if test="${isEdit > 0}">
 							<h4 class="page-title">Sửa quyền</h4>
 						</c:if>
                     </div>
@@ -155,12 +155,7 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-12">
-                                       	<c:if test="${pageRole == 0}">
-										    <button type="submit" class="btn btn-success">Thêm quyền</button>
-										</c:if>
-                                       	<c:if test="${pageRole > 0}">
-										    <button type="submit" class="btn btn-success">sửa quyền</button>
-										</c:if>
+										    <button type="submit" class="btn btn-success">Lưu lại</button>
                                         <a href="${pageContext.request.contextPath}/roles" class="btn btn-primary">Quay lại</a>
                                     </div>
                                 </div>

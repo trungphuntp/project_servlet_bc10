@@ -12,26 +12,31 @@ import repository.AuthenticationRepository;
 public class AuthenticationServices {
 	private AuthenticationRepository authenticationRepository = new AuthenticationRepository();
 	
-	public void checkUserAccount(String email, String password, String remember, HttpServletRequest req, HttpServletResponse resp) {
+	public List<Users> checkUserAccount(String email, String password, String remember, HttpServletRequest req, HttpServletResponse resp) {
 		List<Users> listUsers = authenticationRepository.findUser(email, password);
-		
 		if (listUsers.isEmpty()) {
 			System.out.println("Thất bại");
 		} else {
 			System.out.println("Thành công");
-			Cookie cIsLogin = new Cookie("isLogin", email);
-			cIsLogin.setMaxAge(60 * 60);
-			resp.addCookie(cIsLogin);
+			Cookie cEmail = new Cookie("email", email);
+			Cookie cPassword = new Cookie("password", password);
+			Cookie cIdUser = new Cookie("idUser", listUsers.get(0).getId()+"");
 			
+			cEmail.setMaxAge(60 * 60);
+			cIdUser.setMaxAge(60 * 60);
+			cPassword.setMaxAge(60 * 60);
+			
+			resp.addCookie(cEmail);
+			resp.addCookie(cPassword);
+			resp.addCookie(cIdUser);
+
 			if (remember != null) {
-				Cookie cEmail = new Cookie("email", email);
-				Cookie cPassword = new Cookie("password", password);
-				cEmail.setMaxAge(60 * 60);
-				cPassword.setMaxAge(60 * 60);
-				resp.addCookie(cEmail);
-				resp.addCookie(cPassword);
+				Cookie isRemenber = new Cookie("isRemember", "yes");
+				isRemenber.setMaxAge(60 * 60);
+				resp.addCookie(isRemenber);
 			}
 			
 		}
+		return listUsers;
 	}
 }

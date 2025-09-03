@@ -68,16 +68,28 @@
                     <ul class="nav navbar-top-links navbar-right pull-right">
                         <li>
                             <div class="dropdown">
-                                <a class="profile-pic dropdown-toggle" data-toggle="dropdown" href="#"> 
+                             <c:if test = "${isLogin == true}">
+						          <a class="profile-pic dropdown-toggle" data-toggle="dropdown" href="#"> 
                                     <img src="plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle" />
                                     <b class="hidden-xs">Cybersoft</b> 
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="profile.html">Thông tin cá nhân</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/profile">Thông tin cá nhân</a></li>
                                     <li><a href="#">Thống kê công việc</a></li>
                                     <li class="divider"></li>
                                     <li><a href="#">Đăng xuất</a></li>
                                 </ul>
+						      </c:if>
+						      <c:if test = "${!isLogin == false}">
+						          <a class="profile-pic dropdown-toggle" data-toggle="dropdown" href="#"> 
+                                    <img src="plugins/images/users/default-avatar.jpg" alt="user-img" width="36" class="img-circle" />
+                                    <b class="hidden-xs">Người dùng</b> 
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="${pageContext.request.contextPath}/login">Đăng nhập</a></li>
+                                </ul>
+						      </c:if>
+                               
                             </div>
                         </li>
                     </ul>
@@ -128,9 +140,10 @@
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                         <h4 class="page-title">Danh sách công việc</h4>
+                        
                     </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 text-right">
-                        <a href="task-add.html" class="btn btn-sm btn-success">Thêm mới</a>
+                        <a href="${pageContext.request.contextPath}/task-add" class="btn btn-sm btn-success">Thêm mới</a>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -164,8 +177,8 @@
                                             <td>${i.getDateDDMMYYYY(i.endDate)}</td>
                                             <td>${i.nameStatus}</td>
                                             <td>
-                                                <a href="#" class="btn btn-sm btn-primary">Sửa</a>
-                                                <a href="#" class="btn btn-sm btn-danger">Xóa</a>
+                                                <a href="${ pageContext.request.contextPath}/task-edit?id-edit=${i.id}" class="btn btn-sm btn-primary">Sửa</a>
+                                                <a href="${ pageContext.request.contextPath}/task-delete?id-delete=${i.id}" class="btn btn-sm btn-danger">Xóa</a>
                                                 <a href="#" class="btn btn-sm btn-info">Xem</a>
                                             </td>
                                         </tr>

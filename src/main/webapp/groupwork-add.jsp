@@ -125,10 +125,10 @@
             <div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <c:if test="${pageProject == 0}">
+                        <c:if test="${isEdit == 0}">
                         	<h4 class="page-title">Thêm mới dự án</h4>
 						</c:if>
-                        <c:if test="${pageProject > 0}">
+                        <c:if test="${isEdit > 0}">
                         	<h4 class="page-title">Sửa dự án</h4>
 						</c:if>
                     </div>
@@ -163,7 +163,6 @@
                                 <div class="form-group">
                                     <div class="col-sm-12">
                                         <button type="submit" class="btn btn-success">Lưu lại</button>
-                                        
                                         <a href="${pageContext.request.contextPath}/projects" class="btn btn-primary">Quay lại</a>
                                     </div>
                                 </div>

@@ -91,31 +91,31 @@
             <div class="sidebar-nav navbar-collapse slimscrollsidebar">
                 <ul class="nav" id="side-menu">
                     <li style="padding: 10px 0 0;">
-                        <a href="index.html" class="waves-effect"><i class="fa fa-clock-o fa-fw"
+                        <a href="${pageContext.request.contextPath}/" class="waves-effect"><i class="fa fa-clock-o fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Dashboard</span></a>
                     </li>
                     <li>
-                        <a href="user-table.html" class="waves-effect"><i class="fa fa-user fa-fw"
+                        <a href="${pageContext.request.contextPath}/users" class="waves-effect"><i class="fa fa-user fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Thành viên</span></a>
                     </li>
                     <li>
-                        <a href="role-table.html" class="waves-effect"><i class="fa fa-modx fa-fw"
+                        <a href="${pageContext.request.contextPath}/roles" class="waves-effect"><i class="fa fa-modx fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Quyền</span></a>
                     </li>
                     <li>
-                        <a href="groupwork.html" class="waves-effect"><i class="fa fa-table fa-fw"
+                        <a href="${pageContext.request.contextPath}/projects" class="waves-effect"><i class="fa fa-table fa-fw"
+                                aria-hidden="true"></i><span class="hide-menu">Dự án</span></a>
+                    </li>
+                    <li>
+                        <a href="${pageContext.request.contextPath}/tasks" class="waves-effect active"><i class="fa fa-table fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Công việc</span></a>
                     </li>
                     <li>
-                        <a href="task.html" class="waves-effect"><i class="fa fa-table fa-fw"
-                                aria-hidden="true"></i><span class="hide-menu">Công việc</span></a>
-                    </li>
-                    <li>
-                        <a href="blank.html" class="waves-effect"><i class="fa fa-columns fa-fw"
+                        <a href="${pageContext.request.contextPath}/blank" class="waves-effect"><i class="fa fa-columns fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Blank Page</span></a>
                     </li>
                     <li>
-                        <a href="404.html" class="waves-effect"><i class="fa fa-info-circle fa-fw"
+                        <a href="${pageContext.request.contextPath}/404" class="waves-effect"><i class="fa fa-info-circle fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Error 404</span></a>
                     </li>
                 </ul>
@@ -127,7 +127,13 @@
             <div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Thêm mới công việc</h4>
+                        <c:if test="${isEdit == 0}">
+								<h4 class="page-title">Thêm mới công việc</h4>
+
+						</c:if>
+				           <c:if test="${isEdit > 0}">
+								<h4 class="page-title">Sửa công việc</h4>
+						</c:if>
                     </div>
                 </div>
                 <!-- /.row -->
@@ -136,46 +142,62 @@
                     <div class="col-md-2 col-12"></div>
                     <div class="col-md-8 col-xs-12">
                         <div class="white-box">
-                            <form class="form-horizontal form-material">
+                            <form class="form-horizontal form-material" method="post" action="">
                                 <div class="form-group">
-                                    <label class="col-md-12">Dự án</label>
+                                    <label class="col-md-12" for="project">Dự án</label>
                                     <div class="col-md-12">
-                                        <select class="form-control form-control-line">
-                                            <option>Dự án CRM</option>
-                                            <option>Dự án Elearning</option>
-                                            <option>Dự án Rạp chiếu phim</option>
-                                        </select>
+                                        <select class="form-control form-control-line" name="project" id="project">
+	                                        <c:forEach var = "i" items="${listProjects }">
+										         <option value="${i.id }" ${i.id == taskEdit.job_id ? 'selected' : '' }>${i.name }</option>
+										    </c:forEach>
+									    </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-12">Tên công việc</label>
+                                    <label class="col-md-12" for="nameTask">Tên công việc</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="Tên công việc"
-                                            class="form-control form-control-line">
+                                        <input type="text" placeholder="Tên công việc" required value="${taskEdit.name }"
+                                            class="form-control form-control-line" id="nameTask" name="nameTask">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-12">Người thực hiện</label>
+                                    <label class="col-md-12" for="user">Người thực hiện</label>
                                     <div class="col-md-12">
-                                        <select class="form-control form-control-line">
-                                            <option>Nguyễn Văn Tèo</option>
-                                            <option>Trần Thị Lan</option>
-                                            <option>Cao Ngọc Hiếu</option>
-                                        </select>
+                                         <select class="form-control form-control-line" name="user" id="user">
+	                                        <c:forEach var = "i" items="${listUsers }">
+										         <option value="${i.id }" ${taskEdit.user_id == i.id ? 'selected' : '' } >${i.fullname }</option>
+										    </c:forEach>
+									    </select>
+                                    </div>
+                                </div>
+                                 <c:if test="${isEdit > 0}">
+                                  <div class="form-group">
+                                    <label class="col-md-12" for="statusId">Trạng thái</label>
+                                    <div class="col-md-12">
+                                         <select class="form-control form-control-line" name="statusId" id="statusId">
+	                                        <c:forEach var = "i" items="${listStatus }">
+										         <option value="${i.id }" ${taskEdit.status_id == i.id ? 'selected' : '' } >${i.name }</option>
+										    </c:forEach>
+									    </select>
+                                    </div>
+                                </div>
+								</c:if>
+                                <div class="form-group">
+                                    <label class="col-md-12" for="startDate">Ngày bắt đầu</label>
+                                    <div class="col-md-12">
+                                        <input type="date" placeholder="dd/MM/yyyy"
+                                            class="form-control form-control-line"
+                                            name="startDate" id="startDate" required
+                                            value="${taskEdit.getStartDate() }"
+                                            
+                                            > 
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-12">Ngày bắt đầu</label>
+                                    <label class="col-md-12" for="endDate">Ngày kết thúc</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="dd/MM/yyyy"
-                                            class="form-control form-control-line"> 
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">Ngày kết thúc</label>
-                                    <div class="col-md-12">
-                                        <input type="text" placeholder="dd/MM/yyyy"
-                                            class="form-control form-control-line"> 
+                                        <input type="date" placeholder="dd/MM/yyyy" name="endDate" id="endDate"
+                                            class="form-control form-control-line" value="${ taskEdit.getEndDate()}">  
                                     </div>
                                 </div>
                                 <div class="form-group">
