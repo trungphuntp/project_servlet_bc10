@@ -53,7 +53,6 @@ public class AllPageFilter implements Filter {
 			user = usersServices.getUsersByIdEmailPassword(idUser, email, password);
 		}
 		req.setAttribute("userCurrent", user);
-		
 		chain.doFilter(request, response);
 	}
 

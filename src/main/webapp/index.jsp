@@ -73,7 +73,7 @@
                         <div class="dropdown">
                              <c:if test = "${isLogin}">
 						          <a class="profile-pic dropdown-toggle" data-toggle="dropdown" href="#"> 
-                                    <img src="${!userCurrent.getAvatar().isEmpty() ? userCurrent.getAvatar() : 'plugins/images/users/default-avatar.jpg' }" alt="user-img" width="36" class="img-circle" />
+                                    <img src="${!userCurrent.getAvatar().isEmpty() && userCurrent.getAvatar() != null ? userCurrent.getAvatar() : 'plugins/images/users/default-avatar.jpg' }" alt="user-img" width="36" class="img-circle" />
                                     <b class="hidden-xs">${!userCurrent.getFullname().isEmpty() ? userCurrent.getFullname() : 'Người dùng'}</b> 
                                 </a>
                                 <ul class="dropdown-menu">

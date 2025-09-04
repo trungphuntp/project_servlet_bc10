@@ -195,7 +195,7 @@ public class TaskRepository {
 				+ "JOIN jobs j ON t.job_id = j.id\r\n"
 				+ "JOIN status s ON s.id = t.status_id\r\n"
 				+ "JOIN users u ON u.id = t.user_id\r\n"
-				+ "WHERE u.id = ? AND t.id = ?;";
+				+ "WHERE t.id = ? AND  u.id = ?;";
 		Tasks tasks = new Tasks();
 		Connection connection = MySQLConfig.getConnection();
 		try {

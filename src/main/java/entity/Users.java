@@ -6,7 +6,7 @@ public class Users {
 	private String password;
 	private String fullname;
 	private String phone;
-	private String avatar;
+	private String avatar = "";
 	private int role_id;
 	private String role_desc;
 	

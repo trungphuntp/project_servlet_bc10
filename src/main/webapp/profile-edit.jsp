@@ -68,7 +68,7 @@
                         <div class="dropdown">
                              <c:if test = "${isLogin}">
 						          <a class="profile-pic dropdown-toggle" data-toggle="dropdown" href="#"> 
-                                    <img src="${!userCurrent.getAvatar().isEmpty() ? userCurrent.getAvatar() : 'plugins/images/users/default-avatar.jpg' }" alt="user-img" width="36" class="img-circle" />
+                                    <img src="${!userCurrent.getAvatar().isEmpty() && userCurrent.getAvatar() != null ? userCurrent.getAvatar() : 'plugins/images/users/default-avatar.jpg' }" alt="user-img" width="36" class="img-circle" />
                                     <b class="hidden-xs">${!userCurrent.getFullname().isEmpty() ? userCurrent.getFullname() : 'Người dùng'}</b> 
                                 </a>
                                 <ul class="dropdown-menu">
@@ -135,7 +135,7 @@
             <div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Thêm mới công việc</h4>
+                        <h4 class="page-title">Cập nhật tiến độ công việc</h4>
                     </div>
                 </div>
                 <!-- /.row -->
@@ -144,38 +144,42 @@
                     <div class="col-md-2 col-12"></div>
                     <div class="col-md-8 col-xs-12">
                         <div class="white-box">
-                            <form class="form-horizontal form-material">
+                            <form class="form-horizontal form-material" method = "post" action ="">
                                 <div class="form-group">
-                                    <label class="col-md-12" for="nameJob">Tên dự án</label>
+                                    <label class="col-md-12" for="projectId">Tên dự án</label>
                                     <div class="col-md-12">
-                                        <input type="text" readonly value="" name="nameJob" id="nameJob" class="form-control form-control-line">
+ 										<select class="form-control form-control-line" name="projectId" id="projectId" readonly>
+                                           <c:forEach var = "i" items="${listProjects }">
+                                            	<option value="${i.id }" ${tasks.job_id == i.id ? 'selected' : '' }>${i.name }</option>
+									      </c:forEach>
+                                        </select>                                    
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-12" for="nameTask">Tên công việc</label>
                                     <div class="col-md-12">
-                                        <input type="text" readonly name="nameTask" id="nameTask" value="" class="form-control form-control-line">
+                                        <input type="text" name="nameTask" id="nameTask" value="${tasks.name }" readonly class="form-control form-control-line">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-12" for="startDate">Ngày bắt đầu</label>
                                     <div class="col-md-12">
-                                        <input type="text" readonly value="" name="startDate" id="startDate" class="form-control form-control-line"> 
+                                        <input type="date" value="${tasks.getStartDate()}" name="startDate" readonly id="startDate" class="form-control form-control-line"> 
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-12" for="endDate">Ngày kết thúc</label>
                                     <div class="col-md-12">
-                                        <input type="text" readonly value="17-07/2020" id="endDate" name="endDate" class="form-control form-control-line"> 
+                                        <input type="date" value="${tasks.getEndDate()}" id="endDate" readonly name="endDate" class="form-control form-control-line"> 
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-12" for="status">Trạng thái</label>
+                                    <label class="col-md-12" for="statusId">Trạng thái</label>
                                     <div class="col-md-12">
-                                        <select class="form-control form-control-line" name="status" id="status">
-                                            <option>Chưa thực hiện</option>
-                                            <option>Đang thực hiện</option>
-                                            <option>Đã hoàn thành</option>
+ 										<select class="form-control form-control-line" name="statusId" id="statusId">
+                                           <c:forEach var = "i" items="${listStatus }">
+                                            	<option value="${i.id }" ${tasks.status_id == i.id ? 'selected' : '' }>${i.name }</option>
+									      </c:forEach>
                                         </select>
                                     </div>
                                 </div>

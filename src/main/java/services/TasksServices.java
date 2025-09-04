@@ -30,13 +30,13 @@ public class TasksServices {
 		return taskRepository.findTaskById(id);
 	}
 	
-	public int editTask(String name, String startDate, String endDate, int userId, int jobId,int statusId, int editIdt) {
+	public int editTask(String name, String startDate, String endDate, int userId, int jobId,int statusId, int editId) {
 		Date startDateSql = Date.valueOf(startDate);
 		Date endDateSql = null;
 		if (!endDate.isEmpty()) {
 			endDateSql = Date.valueOf(endDate);
 		}
-		return taskRepository.updateTaskById(name, startDateSql, endDateSql, userId, jobId, statusId, editIdt);
+		return taskRepository.updateTaskById(name, startDateSql, endDateSql, userId, jobId, statusId, editId);
 	}
 	
 	public List<Tasks> getTaskByIdUser(int id) {
@@ -44,7 +44,7 @@ public class TasksServices {
 	}
 	
 	public Tasks getTaskByIdAndIdUser(int id, int idUser) {
-		return .taskRepository.findTaskByIdAndIdUser(id, idUser);
+		return taskRepository.findTaskByIdAndIdUser(id, idUser);
 	}
 	
 }
