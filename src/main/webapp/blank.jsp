@@ -166,7 +166,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </div>
             </div>
             <!-- /.container-fluid -->
-            <footer class="footer text-center"> 2018 &copy; myclass.com </footer>
+            <footer class="footer text-center"> 2025 &copy; myclass.com </footer>
         </div>
         <!-- /#page-wrapper -->
     </div>

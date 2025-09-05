@@ -26,7 +26,7 @@ public class ProjectsServices {
 		return projectsRepository.deleteProject(id);
 	}
 	
-	public Projects findProjectById(int id) {
+	public Projects getProjectById(int id) {
 		return projectsRepository.findProject(id);
 	}
 	

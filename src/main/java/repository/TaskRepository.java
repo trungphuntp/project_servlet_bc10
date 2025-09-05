@@ -221,4 +221,153 @@ public class TaskRepository {
 		return tasks;
 	}
 	
+	public List<Tasks> findTasksByIdStatusAndIdUsers(int idStatus, int userId) {
+		String query = "SELECT t.id, t.name, t.start_date, t.end_date, t.user_id, t.job_id, t.status_id,u.fullname as nameUser,  t.name as nameStatus \r\n"
+				+ "FROM tasks t\r\n"
+				+ "JOIN status s ON t.status_id = s.id\r\n"
+				+ "JOIN users u ON t.user_id = u.id\r\n"
+				+ "WHERE s.id = ? AND u.id = ?";
+		List<Tasks> listTasks = new ArrayList<Tasks>();
+		Connection connection = MySQLConfig.getConnection();
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1,idStatus);
+			preparedStatement.setInt(2, userId);
+			
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				Tasks tasks = new Tasks();
+				tasks.setId(resultSet.getInt("id"));
+				tasks.setName(resultSet.getString("name"));
+				tasks.setStartDate(resultSet.getDate("start_date"));
+				tasks.setEndDate(resultSet.getDate("end_date"));
+				tasks.setUser_id(resultSet.getInt("user_id"));
+				tasks.setJob_id(resultSet.getInt("job_id"));
+				tasks.setStatus_id(resultSet.getInt("status_id"));
+				tasks.setNameUser(resultSet.getString("nameUser"));
+				tasks.setNameStatus(resultSet.getString("nameStatus"));
+				listTasks.add(tasks);
+			}
+			
+		} catch (Exception e) {
+			System.out.println("TaskRepository : " + e.getMessage());
+		}
+		
+		return listTasks;
+	}
+	
+	public List<Tasks> findTasksByIdJob( int idJob) {
+		String query = "SELECT t.id, t.name, t.start_date, t.end_date, t.user_id, t.job_id, t.status_id, j.name as nameJob\r\n"
+				+ "FROM tasks t \r\n"
+				+ "JOIN jobs j ON j.id = t.job_id\r\n"
+				+ "WHERE j.id = ?;";
+		List<Tasks> listTasks = new ArrayList<Tasks>();
+		Connection connection = MySQLConfig.getConnection();
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1,idJob);
+			
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				Tasks tasks = new Tasks();
+				tasks.setId(resultSet.getInt("id"));
+				tasks.setName(resultSet.getString("name"));
+				tasks.setStartDate(resultSet.getDate("start_date"));
+				tasks.setEndDate(resultSet.getDate("end_date"));
+				tasks.setUser_id(resultSet.getInt("user_id"));
+				tasks.setJob_id(resultSet.getInt("job_id"));
+				tasks.setStatus_id(resultSet.getInt("status_id"));
+				tasks.setJobName(resultSet.getString("nameJob"));
+				listTasks.add(tasks);
+			}
+			
+		} catch (Exception e) {
+			System.out.println("TaskRepository : " + e.getMessage());
+		}
+		
+		return listTasks;
+	}
+	
+	
+	
+	
+	public List<Tasks> findTasksByIdStatusAndIdUsersAndIdJob(int idStatus, int userId, int idJob) {
+		String query = "SELECT t.id, t.name, t.start_date, t.end_date, t.user_id, t.job_id, t.status_id,u.fullname as nameUser,  t.name as nameStatus, j.id as idJob, j.name as nameJob \r\n"
+				+ "	FROM tasks t\r\n"
+				+ "	JOIN status s ON t.status_id = s.id\r\n"
+				+ "	JOIN users u ON t.user_id = u.id\r\n"
+				+ "	JOIN jobs j ON j.id = t.job_id\r\n"
+				+ "	WHERE s.id = ? AND u.id = ? AND j.id = ?; ";
+		List<Tasks> listTasks = new ArrayList<Tasks>();
+		Connection connection = MySQLConfig.getConnection();
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1,idStatus);
+			preparedStatement.setInt(2, userId);
+			preparedStatement.setInt(3, idJob);
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				Tasks tasks = new Tasks();
+				tasks.setId(resultSet.getInt("id"));
+				tasks.setName(resultSet.getString("name"));
+				tasks.setStartDate(resultSet.getDate("start_date"));
+				tasks.setEndDate(resultSet.getDate("end_date"));
+				tasks.setUser_id(resultSet.getInt("user_id"));
+				tasks.setJob_id(resultSet.getInt("job_id"));
+				tasks.setStatus_id(resultSet.getInt("status_id"));
+				tasks.setNameUser(resultSet.getString("nameUser"));
+				tasks.setNameStatus(resultSet.getString("nameStatus"));
+				tasks.setJobName(resultSet.getString("nameJob"));
+				listTasks.add(tasks);
+			}
+			
+		} catch (Exception e) {
+			System.out.println("TaskRepository : " + e.getMessage());
+		}
+		
+		return listTasks;
+	}
+	
+	public List<Tasks> findTasksByIdStatusAndIdJob(int idStatus, int idJob) {
+		String query = "SELECT t.id, t.name, t.start_date, t.end_date, t.user_id, t.job_id, t.status_id,u.fullname as nameUser,  t.name as nameStatus, j.id as idJob, j.name as nameJob \r\n"
+				+ "	FROM tasks t\r\n"
+				+ "	JOIN status s ON t.status_id = s.id\r\n"
+				+ "	JOIN users u ON t.user_id = u.id\r\n"
+				+ "	JOIN jobs j ON j.id = t.job_id\r\n"
+				+ "	WHERE s.id = ? AND j.id = ?; ";
+		List<Tasks> listTasks = new ArrayList<Tasks>();
+		Connection connection = MySQLConfig.getConnection();
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1,idStatus);
+			preparedStatement.setInt(2, idJob);
+
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				Tasks tasks = new Tasks();
+				tasks.setId(resultSet.getInt("id"));
+				tasks.setName(resultSet.getString("name"));
+				tasks.setStartDate(resultSet.getDate("start_date"));
+				tasks.setEndDate(resultSet.getDate("end_date"));
+				tasks.setUser_id(resultSet.getInt("user_id"));
+				tasks.setJob_id(resultSet.getInt("job_id"));
+				tasks.setStatus_id(resultSet.getInt("status_id"));
+				tasks.setNameUser(resultSet.getString("nameUser"));
+				tasks.setNameStatus(resultSet.getString("nameStatus"));
+				tasks.setJobName(resultSet.getString("nameJob"));
+				listTasks.add(tasks);
+			}
+			
+		} catch (Exception e) {
+			System.out.println("TaskRepository : " + e.getMessage());
+		}
+		
+		return listTasks;
+	}
+	
+	
+	
+	
+	
 }

@@ -31,6 +31,10 @@ public class UsersServices {
 		return usersRepository.updateUser(fullname, email, password, phone, roleId, idEdit);
 	}
 	
+	public List<Users> getUserByIdJob(int idJob) {
+		return usersRepository.findUserByIdJob(idJob);
+	}
+	
 	
 
 }

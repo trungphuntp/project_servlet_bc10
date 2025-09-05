@@ -47,4 +47,20 @@ public class TasksServices {
 		return taskRepository.findTaskByIdAndIdUser(id, idUser);
 	}
 	
+	public List<Tasks> getTasksByIdStatusAndIdUsers(int idStatus, int idUsers) {
+		return taskRepository.findTasksByIdStatusAndIdUsers(idStatus, idUsers);
+	} 
+	
+	public List<Tasks> getTasksByIdJob(int idJob){
+		return taskRepository.findTasksByIdJob(idJob);
+	}
+	
+	public List<Tasks> getTasksByIdStatusAndIdUserAndIdJob(int idStatus, int userId, int idJob ){
+		return taskRepository.findTasksByIdStatusAndIdUsersAndIdJob(idStatus, userId, idJob);
+	}
+	
+	public List<Tasks> getTasksByIdStatusAndIdJob(int idStatus, int idJob) {
+		return taskRepository.findTasksByIdStatusAndIdJob(idStatus, idJob);
+		
+	}
 }

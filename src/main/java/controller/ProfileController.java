@@ -34,28 +34,17 @@ public class ProfileController extends HttpServlet{
 			}
 		}
 		List<Tasks> listTasks = tasksServices.getTaskByIdUser(idUser);
-		
-	
 //		COUNT FOR WIDTH COUNT TASKS STATUS
 		List<Status> listStatus = statusServices.getAllStatus(); 
-		List<Tasks> listTasksAll = tasksServices.getAllTasks(); 
-
-		for (Status status  : listStatus) {
-			// so luong status trong task
-			int statusCountInTask = 0;
+		for (Status status : listStatus) {
+			status.setTasksListStatus(tasksServices.getTasksByIdStatusAndIdUsers(status.getId(), idUser));
 			
-			for ( Tasks tasksCurrent : listTasksAll) {
-				if (tasksCurrent.getStatus_id() == status.getId()) {
-					statusCountInTask+=1;
-				}
-			}
-			double totalStatusType = listStatus.size(); // 3
-			double totalStatusTask = listTasksAll.size(); // so luong tasks
-			
-			// width cua process trong profile
-			int statusWidth = (int) Math.round(statusCountInTask / totalStatusTask * 100 ) ;
+			double countStatusTask = status.getTasksListStatus().size();
+			double totalStatusTask = listTasks.size();
+			int statusWidth = (int) Math.round(countStatusTask / totalStatusTask * 100 ) ;
 			status.setWidthStatus(statusWidth);
 		}
+		
 		
 		List<String> ListColorStatusText = new ArrayList<>(
 			    List.of("text-megna", "text-primary","text-danger")

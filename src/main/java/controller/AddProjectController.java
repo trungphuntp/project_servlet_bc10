@@ -30,7 +30,7 @@ public class AddProjectController extends HttpServlet{
 				System.out.println("AddProjectController : " + e.getMessage());
 			}
 			
-			Projects projects = projectsServices.findProjectById(idEdit);
+			Projects projects = projectsServices.getProjectById(idEdit);
 		
 			
 			if (projects.getId() > 0) {

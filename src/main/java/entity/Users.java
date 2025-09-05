@@ -1,5 +1,8 @@
 package entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Users {
 	private int id;
 	private String email;
@@ -9,13 +12,13 @@ public class Users {
 	private String avatar = "";
 	private int role_id;
 	private String role_desc;
+	private List<Status> AllStatus; 
 	
 	
 	
 
 	public Users(int id, String email, String password, String fullname, String phone, String avatar, int role_id,
 			String role_desc) {
-		
 		this.id = id;
 		this.email = email;
 		this.password = password;
@@ -24,10 +27,11 @@ public class Users {
 		this.avatar = avatar;
 		this.role_id = role_id;
 		this.role_desc = role_desc;
+		this.AllStatus = new ArrayList<Status>();
 	}
 
 	public Users() {
-		// TODO Auto-generated constructor stub
+		this.AllStatus = new ArrayList<Status>();
 	}
 	
 	public int getId() {
@@ -81,6 +85,14 @@ public class Users {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public List<Status> getAllStatus() {
+		return AllStatus;
+	}
+
+	public void setAllStatus(List<Status> allStatus) {
+		AllStatus = allStatus;
 	}
 	
 	

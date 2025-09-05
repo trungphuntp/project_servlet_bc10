@@ -157,4 +157,34 @@ public class UsersRepository {
 		
 		return rowCount;
 	}
+	
+	public List<Users> findUserByIdJob(int idJob) {
+		String query = "SELECT u.id, u.email,u.password, u.fullname,u.avatar, u.role_id, u.phone\r\n"
+				+ "FROM tasks t \r\n"
+				+ "JOIN users u ON t.user_id = u.id\r\n"
+				+ "JOIN jobs j ON j.id = t.job_id\r\n"
+				+ "WHERE j.id = ?;";
+		List<Users> listUsers = new ArrayList<Users>();
+		Connection connection = MySQLConfig.getConnection();
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, idJob);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				Users users = new Users();
+				users.setId(resultSet.getInt("id"));
+				users.setEmail(resultSet.getString("email"));
+				users.setPassword(resultSet.getString("password"));
+				users.setFullname(resultSet.getString("fullname"));
+				users.setRole_id(resultSet.getInt("role_id"));
+				users.setPhone(resultSet.getString("phone"));
+				users.setAvatar(resultSet.getString("avatar"));
+				listUsers.add(users);
+			}
+		} catch (Exception e) {
+			System.out.println("UsersRepository : " +  e.getMessage());
+		}
+		
+		return listUsers;
+	}
 }

@@ -172,7 +172,7 @@
 	                                            <td>
 	                                                <a href="${pageContext.request.contextPath}/user-edit?id-edit=${i.id}" class="btn btn-sm btn-primary">Sửa</a>
 	                                                <a href="${pageContext.request.contextPath}/user-delete?id-delete=${i.id}" class="btn btn-sm btn-danger">Xóa</a>
-	                                                <a href="${pageContext.request.contextPath}/user-detail" class="btn btn-sm btn-info">Xem</a>
+	                                                <a href="${pageContext.request.contextPath}/user-detail?id-user=${i.id}" class="btn btn-sm btn-info">Xem</a>
 	                                            </td>
 	                                        </tr>
 									    </c:forEach>
@@ -185,7 +185,7 @@
                 <!-- /.row -->
             </div>
             <!-- /.container-fluid -->
-            <footer class="footer text-center"> 2018 &copy; myclass.com </footer>
+            <footer class="footer text-center"> 2025 &copy; myclass.com </footer>
         </div>
         <!-- /#page-wrapper -->
     </div>
