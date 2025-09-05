@@ -63,4 +63,9 @@ public class TasksServices {
 		return taskRepository.findTasksByIdStatusAndIdJob(idStatus, idJob);
 		
 	}
+	
+	public List<Tasks> getTasksByIdStatus(int idStatus){
+		return taskRepository.findTasksByIdStatus( idStatus);
+	}
+	
 }

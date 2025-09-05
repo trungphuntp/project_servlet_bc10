@@ -15,17 +15,13 @@ import javax.servlet.http.HttpServletResponse;
 import entity.Users;
 import services.UsersServices;
 
-@WebFilter(filterName = "AllPageFilter", urlPatterns = { "/*" })
-public class AllPageFilter implements Filter {
+@WebFilter(filterName = "LoginFilter", urlPatterns = {"/login"})
+public class LoginFilter implements Filter{
 	private UsersServices usersServices = new UsersServices();
-	
+
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		request.setCharacterEncoding("UTF-8");
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
-
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse resp = (HttpServletResponse) response;
 		Cookie[] listCookie = req.getCookies();
@@ -46,8 +42,6 @@ public class AllPageFilter implements Filter {
 				}
 			}
 		}
-		System.out.println(req.getServletPath());
-		
 		boolean isLogin = false;
 		Users user = new Users();
 		if (!email.isEmpty() && !password.isEmpty() && idUser > 0) {
@@ -55,22 +49,10 @@ public class AllPageFilter implements Filter {
 			req.setAttribute("isLogin", isLogin);
 			user = usersServices.getUsersByIdEmailPassword(idUser, email, password);
 		}
-		req.setAttribute("userCurrent", user);
-
-//		AUTHENTICATION 
-		// Check trang blank để không vòng lặp
-		if (req.getServletPath().equals("/blank") ||
-				req.getServletPath().equals("") ||
-				req.getServletPath().equals("/404") ||
-				req.getServletPath().equals("/login")) {
-		chain.doFilter(request, response);
-		return;
-		}
-		
-		if (user.getId() > 0 && !user.getEmail().isEmpty() && !user.getPassword().isEmpty()) {
+		if (user.getId() <= 0 || user.getEmail().isEmpty() || user.getPassword().isEmpty() ) {
 			chain.doFilter(request, response);
 		} else {
-			resp.sendRedirect(req.getContextPath() + "/login");
+			resp.sendRedirect(req.getContextPath() + "/");
 		}
 		
 		

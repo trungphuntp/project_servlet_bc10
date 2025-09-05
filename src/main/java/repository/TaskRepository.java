@@ -367,6 +367,39 @@ public class TaskRepository {
 	}
 	
 	
+	public List<Tasks> findTasksByIdStatus(int idStatus) {
+		String query = "SELECT t.id, t.name, t.start_date, t.end_date, t.user_id, t.job_id, t.status_id, s.name as nameStatus\r\n"
+				+ "FROM tasks t\r\n"
+				+ "JOIN status s ON t.status_id = s.id\r\n"
+				+ "WHERE s.id = ?;";
+		List<Tasks> listTasks = new ArrayList<Tasks>();
+		Connection connection = MySQLConfig.getConnection();
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, idStatus);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				Tasks tasks = new Tasks();
+				tasks.setId(resultSet.getInt("id"));
+				tasks.setName(resultSet.getString("name"));
+				tasks.setStartDate(resultSet.getDate("start_date"));
+				tasks.setEndDate(resultSet.getDate("end_date"));
+				tasks.setUser_id(resultSet.getInt("user_id"));
+				tasks.setJob_id(resultSet.getInt("job_id"));
+				tasks.setStatus_id(resultSet.getInt("status_id"));
+				tasks.setNameStatus(resultSet.getString("nameStatus"));
+				listTasks.add(tasks);
+			}
+		} catch (Exception e) {
+			System.out.println("TaskRepository : " + e.getMessage());
+		}
+		
+		
+		
+		return listTasks;
+	}
+	
+	
 	
 	
 	

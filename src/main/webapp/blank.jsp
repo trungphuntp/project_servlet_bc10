@@ -20,18 +20,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="icon" type="image/png" sizes="16x16" href="plugins/images/favicon.png">
     <title>Pixel Admin - Responsive Admin Dashboard Template build with Twitter Bootstrap</title>
     <!-- Bootstrap Core CSS -->
-    <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Menu CSS -->
-    <link href="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
     <!-- Animation CSS -->
-    <link href="css/animate.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/animate.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
     <!-- color CSS you can use different color css from css/colors folder -->
     <!-- We have chosen the skin-blue (blue.css) for this starter
           page. However, you can choose any other skin from folder css / colors .
 -->
-    <link href="css/colors/blue-dark.css" id="theme" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/colors/blue-dark.css" id="theme" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -172,17 +172,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </div>
     <!-- /#wrapper -->
     <!-- jQuery -->
-    <script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/plugins/bower_components/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap Core JavaScript -->
-    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- Menu Plugin JavaScript -->
-    <script src="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+    <script src="${pageContext.request.contextPath}/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
     <!--slimscroll JavaScript -->
-    <script src="js/jquery.slimscroll.js"></script>
+    <script src="${pageContext.request.contextPath}js/jquery.slimscroll.js"></script>
     <!--Wave Effects -->
-    <script src="js/waves.js"></script>
+    <script src="${pageContext.request.contextPath}/js/waves.js"></script>
     <!-- Custom Theme JavaScript -->
-    <script src="js/custom.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/custom.min.js"></script>
 </body>
 
 </html>

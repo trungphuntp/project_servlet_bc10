@@ -14,13 +14,13 @@
     <link rel="icon" type="image/png" sizes="16x16" href='<c:url value="/assets/plugins/images/favicon.png"></c:url>'>
     <title>403 - Forbidden</title>
     <!-- Bootstrap Core CSS -->
-    <link href='bootstrap/dist/css/bootstrap.min.css' rel="stylesheet">
+    <link href='${pageContext.request.contextPath}/bootstrap/dist/css/bootstrap.min.css' rel="stylesheet">
     <!-- animation CSS -->
-    <link href='css/animate.css' rel="stylesheet">
+    <link href='${pageContext.request.contextPath}/css/animate.css' rel="stylesheet">
     <!-- Custom CSS -->
-    <link href='css/style.css' rel="stylesheet">
+    <link href='${pageContext.request.contextPath}/css/style.css' rel="stylesheet">
     <!-- color CSS -->
-    <link href='css/colors/blue.css' id="theme" rel="stylesheet">
+    <link href='${pageContext.request.contextPath}/css/colors/blue.css' id="theme" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -45,9 +45,9 @@
         </div>
     </section>
     <!-- jQuery -->
-    <script src='plugins/bower_components/jquery/dist/jquery.min.js'></script>
+    <script src='${pageContext.request.contextPath}/plugins/bower_components/jquery/dist/jquery.min.js'></script>
     <!-- Bootstrap Core JavaScript -->
-    <script src='bootstrap/dist/js/bootstrap.min.js'></script>
+    <script src='${pageContext.request.contextPath}/bootstrap/dist/js/bootstrap.min.js'></script>
     <script type="text/javascript">
     $(function() {
         $(".preloader").fadeOut();
