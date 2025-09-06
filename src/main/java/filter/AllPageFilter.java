@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import entity.Users;
 import services.UsersServices;
@@ -46,8 +47,8 @@ public class AllPageFilter implements Filter {
 				}
 			}
 		}
-		System.out.println(req.getServletPath());
 		
+//		Truyền thông tin USERS cho tất cả page
 		boolean isLogin = false;
 		Users user = new Users();
 		if (!email.isEmpty() && !password.isEmpty() && idUser > 0) {
@@ -56,6 +57,11 @@ public class AllPageFilter implements Filter {
 			user = usersServices.getUsersByIdEmailPassword(idUser, email, password);
 		}
 		req.setAttribute("userCurrent", user);
+		
+//		Gắn user vô season để sử dụng ở controller
+		HttpSession session = req.getSession();
+		session.setAttribute("userLogin", user);
+		
 
 //		AUTHENTICATION 
 		// Check trang blank để không vòng lặp
@@ -66,8 +72,46 @@ public class AllPageFilter implements Filter {
 		chain.doFilter(request, response);
 		return;
 		}
-		
+		/**
+		 * Id Role
+		 * 1 : Admin -> Quản trị
+		 * 2 : Manager -> Manager
+		 * 3 : Employee -> Nhân viên
+		 */
+		String path = req.getServletPath();
+
+//		CHUYỂN TRANG 
 		if (user.getId() > 0 && !user.getEmail().isEmpty() && !user.getPassword().isEmpty()) {
+			
+			// NHÂN VIÊN 
+			if (user.getRole_id() == 3) {
+				if (path.startsWith("/users") || 
+						path.startsWith("/roles") ||
+						path.startsWith("/projects") ||
+						path.startsWith("/tasks"))
+				{
+					resp.sendRedirect(req.getContextPath() + "/");
+					return;
+				}
+			}
+			// MANAGER
+			if (user.getRole_id() == 2) {
+				if (path.startsWith("/roles")) 
+				{
+					resp.sendRedirect(req.getContextPath() + "/");
+					return;
+				}
+
+			}
+			// ADMIN
+			if (user.getRole_id() == 1) {
+				
+			}
+			
+			
+			
+			
+
 			chain.doFilter(request, response);
 		} else {
 			resp.sendRedirect(req.getContextPath() + "/login");

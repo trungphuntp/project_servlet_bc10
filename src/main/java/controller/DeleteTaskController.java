@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import services.TasksServices;
 
-@WebServlet(name="DeleteTaskController", urlPatterns = "/task-delete")
+@WebServlet(name="DeleteTaskController", urlPatterns = "/tasks/task-delete")
 public class DeleteTaskController extends HttpServlet{
 	private TasksServices tasksServices = new TasksServices();
 	@Override

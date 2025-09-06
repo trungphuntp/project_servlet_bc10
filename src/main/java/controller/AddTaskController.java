@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import entity.Projects;
 import entity.Status;
@@ -19,7 +20,7 @@ import services.StatusServices;
 import services.TasksServices;
 import services.UsersServices;
 
-@WebServlet(name = "AddTaskController",urlPatterns = {"/task-add","/task-edit"})
+@WebServlet(name = "AddTaskController",urlPatterns = {"/tasks/task-add","/tasks/task-edit"})
 public class AddTaskController extends HttpServlet{
 	private TasksServices tasksServices = new TasksServices();
 	private ProjectsServices projectsServices = new ProjectsServices();
@@ -27,12 +28,28 @@ public class AddTaskController extends HttpServlet{
 	private StatusServices statusServices = new StatusServices();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		List<Projects> listProjects = projectsServices.getAllProjects();
+		List<Projects> listProjects = null;
 		List<Users> listUsers = usersServices.getAllUsers();
 		List<Status> listStatus = statusServices.getAllStatus();
 		int isEdit = 0;
 		
-		if (req.getServletPath().equals("/task-edit")) {
+		HttpSession session = req.getSession(false);
+		Users users = (Users) session.getAttribute("userLogin");
+		if (session != null ) {
+			if (users.getId() > 0) {
+//				ROLE ADMIN
+				if (users.getRole_id() == 1) {
+					listProjects = projectsServices.getAllProjects();
+				}
+//				ROLE LEADER 
+				if (users.getRole_id() == 2) {
+					listProjects = projectsServices.getProjectByIdUser(users.getId());
+				}
+			}
+		}
+		
+//		Đường dẫn /tasks/task-edit
+		if (req.getServletPath().equals("/tasks/task-edit")) {
 			isEdit = 1;
 			
 			int idEdit = 0;
@@ -42,11 +59,9 @@ public class AddTaskController extends HttpServlet{
 				System.out.println("AddTaskController : " + e.getMessage());
 			}
 			Tasks taskEdit = tasksServices.getTaskById(idEdit);
-			req.setAttribute("taskEdit", taskEdit);
+			req.setAttribute("taskEdit", taskEdit);			
 		}
 
-		
-		
 		req.setAttribute("isEdit", isEdit);
 		req.setAttribute("listProjects", listProjects);
 		req.setAttribute("listUsers", listUsers);
@@ -71,14 +86,17 @@ public class AddTaskController extends HttpServlet{
 			System.out.println("AddTaskController : " + e.getMessage());
 		}
 		
-		if (req.getServletPath().equals("/task-add")) {
+//		đường dẫn /tasks/task-add
+		if (req.getServletPath().equals("/tasks/task-add")) {
 			if (!nameTask.isEmpty() && !startDate.isEmpty() && projectId != 0 && userId != 0) {
 				tasksServices.addTask(nameTask, projectId, userId, startDate, endDate);
 				resp.sendRedirect(req.getContextPath()+"/tasks");
 				return;
 			}
 		}
-		if (req.getServletPath().equals("/task-edit")) {
+		
+//		đường dẫn /tasks/task-edit
+		if (req.getServletPath().equals("/tasks/task-edit")) {
 			if (!nameTask.isEmpty() && !startDate.isEmpty() && projectId != 0 && userId != 0) {
 				int idEdit = 0;
 				int statusId = 0;

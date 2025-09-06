@@ -27,7 +27,11 @@ public class ProjectsServices {
 	}
 	
 	public Projects getProjectById(int id) {
-		return projectsRepository.findProject(id);
+		return projectsRepository.findProjectById(id);
+	}
+	
+	public List<Projects> getProjectByIdUser(int idUser) {
+		return projectsRepository.findProjectByIdUser(idUser);
 	}
 	
 	public int editProjectById(String name,String start,String end, int  id) {

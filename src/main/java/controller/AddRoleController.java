@@ -11,14 +11,15 @@ import javax.servlet.http.HttpServletResponse;
 import entity.Roles;
 import services.RolesServices;
 
-@WebServlet(name="AddRoleController",urlPatterns = {"/role-add","/role-edit"})
+@WebServlet(name="AddRoleController",urlPatterns = {"/roles/role-add","/roles/role-edit"})
 public class AddRoleController extends HttpServlet {
 	private RolesServices rolesServices = new RolesServices();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {	
 		int isEdit = 0;
-		if (req.getServletPath().equals("/role-edit")) {
+//		đường dẫn /roles/role-add
+		if (req.getServletPath().equals("/roles/role-add")) {
 			int idEdit = 0;
 			try {
 				 idEdit = Integer.parseInt(req.getParameter("id-edit"));
@@ -51,12 +52,14 @@ public class AddRoleController extends HttpServlet {
 			System.out.println("AddRoleController : " + e.getMessage());
 		}
 		
-		if (req.getServletPath().equals("/role-add") ) {
+//		đường dẫn /roles/role-add
+		if (req.getServletPath().equals("/roles/role-add") ) {
 			rolesServices.addRole(nameRole, desc);
 			
 		}
 		
-		if (req.getServletPath().equals("/role-edit")) {
+//		đường dẫn /roles/role-edit
+		if (req.getServletPath().equals("/roles/role-edit")) {
 			int idEdit = 0;
 			try {
 				 idEdit = Integer.parseInt(req.getParameter("id-edit").trim());

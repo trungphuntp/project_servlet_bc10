@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import services.RolesServices;
 
 
-@WebServlet(name="DeleteRoleController", urlPatterns = "/role-delete")
+@WebServlet(name="DeleteRoleController", urlPatterns = "/roles/role-delete")
 public class DeleteRoleController extends HttpServlet{
 	private RolesServices rolesServices = new RolesServices();
 	@Override

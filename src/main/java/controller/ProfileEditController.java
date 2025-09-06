@@ -18,7 +18,7 @@ import services.ProjectsServices;
 import services.StatusServices;
 import services.TasksServices;
 
-@WebServlet(name = "ProfileEditController" , urlPatterns = "/profile-edit")
+@WebServlet(name = "ProfileEditController" , urlPatterns = "/profile/profile-edit")
 public class ProfileEditController extends HttpServlet {
 	private ProjectsServices projectsServices = new ProjectsServices();
 	private StatusServices statusServices = new StatusServices();

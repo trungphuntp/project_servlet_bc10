@@ -55,10 +55,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="top-left-part">
                     <a class="logo" href="${pageContext.request.contextPath}/">
                         <b>
-                            <img src="plugins/images/pixeladmin-logo.png" alt="home" />
+                            <img src="${pageContext.request.contextPath}/plugins/images/pixeladmin-logo.png" alt="home" />
                         </b>
                         <span class="hidden-xs">
-                            <img src="plugins/images/pixeladmin-text.png" alt="home" />
+                            <img src="${pageContext.request.contextPath}/plugins/images/pixeladmin-text.png" alt="home" />
                         </span>
                     </a>
                 </div>
@@ -77,7 +77,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <div class="dropdown">
                              <c:if test = "${isLogin}">
 						          <a class="profile-pic dropdown-toggle" data-toggle="dropdown" href="#"> 
-                                    <img src="${!userCurrent.getAvatar().isEmpty() && userCurrent.getAvatar() != null ? userCurrent.getAvatar() : 'plugins/images/users/default-avatar.jpg' }" alt="user-img" width="36" class="img-circle" />
+                                    <img src="${!userCurrent.getAvatar().isEmpty() && userCurrent.getAvatar() != null ? userCurrent.getAvatar() : pageContext.request.contextPath.concat('/plugins/images/users/default-avatar.jpg') }" alt="user-img" width="36" class="img-circle" />
                                     <b class="hidden-xs">${!userCurrent.getFullname().isEmpty() ? userCurrent.getFullname() : 'Người dùng'}</b> 
                                 </a>
                                 <ul class="dropdown-menu">
@@ -88,7 +88,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						      </c:if>
 						      <c:if test = "${!isLogin}">
 						          <a class="profile-pic dropdown-toggle" data-toggle="dropdown" href="#"> 
-                                    <img src="plugins/images/users/default-avatar.jpg" alt="user-img" width="36" class="img-circle" />
+                                    <img src="${pageContext.request.contextPath}/plugins/images/users/default-avatar.jpg" alt="user-img" width="36" class="img-circle" />
                                     <b class="hidden-xs">Người dùng</b> 
                                 </a>
                                 <ul class="dropdown-menu">

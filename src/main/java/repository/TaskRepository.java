@@ -257,9 +257,11 @@ public class TaskRepository {
 	}
 	
 	public List<Tasks> findTasksByIdJob( int idJob) {
-		String query = "SELECT t.id, t.name, t.start_date, t.end_date, t.user_id, t.job_id, t.status_id, j.name as nameJob\r\n"
-				+ "FROM tasks t \r\n"
+		String query = "SELECT t.id, t.name, t.start_date, t.end_date, t.user_id, t.job_id, t.status_id, j.name as nameJob, u.fullname as nameUser, s.name as nameStatus\r\n"
+				+ "FROM tasks t\r\n"
 				+ "JOIN jobs j ON j.id = t.job_id\r\n"
+				+ "JOIN users u ON t.user_id = u.id\r\n"
+				+ "JOIN status s ON s.id = t.status_id\r\n"
 				+ "WHERE j.id = ?;";
 		List<Tasks> listTasks = new ArrayList<Tasks>();
 		Connection connection = MySQLConfig.getConnection();
@@ -278,6 +280,8 @@ public class TaskRepository {
 				tasks.setJob_id(resultSet.getInt("job_id"));
 				tasks.setStatus_id(resultSet.getInt("status_id"));
 				tasks.setJobName(resultSet.getString("nameJob"));
+				tasks.setNameUser(resultSet.getString("nameUser") );
+				tasks.setNameStatus(resultSet.getString("nameStatus"));
 				listTasks.add(tasks);
 			}
 			

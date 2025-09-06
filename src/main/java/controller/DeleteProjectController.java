@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import services.ProjectsServices;
 
-@WebServlet(name = "DeleteProjectController", urlPatterns = "/project-delete")
+@WebServlet(name = "DeleteProjectController", urlPatterns = "/projects/project-delete")
 public class DeleteProjectController extends HttpServlet{
 	private ProjectsServices projectsServices = new ProjectsServices();
 	@Override

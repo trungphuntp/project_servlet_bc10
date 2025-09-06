@@ -19,7 +19,7 @@ import services.StatusServices;
 import services.TasksServices;
 import services.UsersServices;
 
-@WebServlet(name="ProjectDetailController", urlPatterns = {"/project-detail"})
+@WebServlet(name="ProjectDetailController", urlPatterns = {"/projects/project-detail"})
 public class ProjectDetailController extends HttpServlet{
 	private UsersServices usersServices = new UsersServices();
 	private StatusServices statusServices = new StatusServices();

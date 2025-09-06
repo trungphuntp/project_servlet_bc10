@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import services.UsersServices;
 
-@WebServlet(name = "DeleteUserController",urlPatterns = "/user-delete")
+@WebServlet(name = "DeleteUserController",urlPatterns = "/users/user-delete")
 public class DeleteUserController extends HttpServlet{
 	private UsersServices usersServices = new UsersServices();
 	@Override

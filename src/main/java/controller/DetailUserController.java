@@ -17,7 +17,7 @@ import services.StatusServices;
 import services.TasksServices;
 import services.UsersServices;
 
-@WebServlet(name = "DetailUserController" ,  urlPatterns = "/user-detail")
+@WebServlet(name = "DetailUserController" ,  urlPatterns = "/users/user-detail")
 public class DetailUserController extends HttpServlet{
 	private UsersServices usersServices = new UsersServices();
 	private TasksServices tasksServices = new TasksServices();

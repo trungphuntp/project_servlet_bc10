@@ -47,10 +47,10 @@
                 <div class="top-left-part">
                     <a class="logo" href="${pageContext.request.contextPath}/">
                         <b>
-                            <img src="plugins/images/pixeladmin-logo.png" alt="home" />
+                            <img src="${pageContext.request.contextPath}/plugins/images/pixeladmin-logo.png" alt="home" />
                         </b>
                         <span class="hidden-xs">
-                            <img src="plugins/images/pixeladmin-text.png" alt="home" />
+                            <img src="${pageContext.request.contextPath}/plugins/images/pixeladmin-text.png" alt="home" />
                         </span>
                     </a>
                 </div>
@@ -69,7 +69,7 @@
                         <div class="dropdown">
                              <c:if test = "${isLogin}">
 						          <a class="profile-pic dropdown-toggle" data-toggle="dropdown" href="#"> 
-                                    <img src="${!userCurrent.getAvatar().isEmpty() && userCurrent.getAvatar() != null ? userCurrent.getAvatar() : 'plugins/images/users/default-avatar.jpg' }" alt="user-img" width="36" class="img-circle" />
+                                    <img src="${!userCurrent.getAvatar().isEmpty() && userCurrent.getAvatar() != null ? userCurrent.getAvatar() : pageContext.request.contextPath.concat('/plugins/images/users/default-avatar.jpg') }" alt="user-img" width="36" class="img-circle" />
                                     <b class="hidden-xs">${!userCurrent.getFullname().isEmpty() ? userCurrent.getFullname() : 'Người dùng'}</b> 
                                 </a>
                                 <ul class="dropdown-menu">
@@ -80,7 +80,7 @@
 						      </c:if>
 						      <c:if test = "${!isLogin}">
 						          <a class="profile-pic dropdown-toggle" data-toggle="dropdown" href="#"> 
-                                    <img src="plugins/images/users/default-avatar.jpg" alt="user-img" width="36" class="img-circle" />
+                                    <img src="${pageContext.request.contextPath}/plugins/images/users/default-avatar.jpg" alt="user-img" width="36" class="img-circle" />
                                     <b class="hidden-xs">Người dùng</b> 
                                 </a>
                                 <ul class="dropdown-menu">
@@ -147,7 +147,7 @@
                             <div class="user-bg"> <img width="100%" alt="user" src="plugins/images/large/img1.jpg">
                                 <div class="overlay-box">
                                     <div class="user-content">
-                                        <a href="javascript:void(0)"><img src="${!userCurrent.getAvatar().isEmpty() && userCurrent.getAvatar() != null ? userCurrent.getAvatar() : 'plugins/images/users/default-avatar.jpg' }"
+                                        <a href="javascript:void(0)"><img src="${!userCurrent.getAvatar().isEmpty() && userCurrent.getAvatar() != null ? userCurrent.getAvatar() : pageContext.request.contextPath.concat('/plugins/images/users/default-avatar.jpg') }"
                                                 class="thumb-lg img-circle" alt="img"></a>
                                         <h4 class="text-white">${userCurrent.fullname }</h4>
                                         <h5 class="text-white">${userCurrent.email }</h5>
@@ -219,7 +219,7 @@
                                             <td>${i.getDateDDMMYYYY(i.endDate) }</td>
                                             <td>${i.nameStatus }</td>
                                             <td>
-                                                <a href="${pageContext.request.contextPath}/profile-edit?id-task=${i.id }" class="btn btn-sm btn-primary">Cập nhật</a>
+                                                <a href="${pageContext.request.contextPath}/profile/profile-edit?id-task=${i.id }" class="btn btn-sm btn-primary">Cập nhật</a>
                                             </td>
                                         </tr>
 								      </c:forEach>

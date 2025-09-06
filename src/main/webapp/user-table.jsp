@@ -48,10 +48,10 @@
                 <div class="top-left-part">
                     <a class="logo" href="${pageContext.request.contextPath}/">
                         <b>
-                            <img src="plugins/images/pixeladmin-logo.png" alt="home" />
+                            <img src="${pageContext.request.contextPath}/plugins/images/pixeladmin-logo.png" alt="home" />
                         </b>
                         <span class="hidden-xs">
-                            <img src="plugins/images/pixeladmin-text.png" alt="home" />
+                            <img src="${pageContext.request.contextPath}/plugins/images/pixeladmin-text.png" alt="home" />
                         </span>
                     </a>
                 </div>
@@ -70,7 +70,7 @@
                         <div class="dropdown">
                              <c:if test = "${isLogin}">
 						          <a class="profile-pic dropdown-toggle" data-toggle="dropdown" href="#"> 
-                                    <img src="${!userCurrent.getAvatar().isEmpty() && userCurrent.getAvatar() != null ? userCurrent.getAvatar() : 'plugins/images/users/default-avatar.jpg' }" alt="user-img" width="36" class="img-circle" />
+                                    <img src="${!userCurrent.getAvatar().isEmpty() && userCurrent.getAvatar() != null ? userCurrent.getAvatar() : pageContext.request.contextPath.concat('/plugins/images/users/default-avatar.jpg') }" alt="user-img" width="36" class="img-circle" />
                                     <b class="hidden-xs">${!userCurrent.getFullname().isEmpty() ? userCurrent.getFullname() : 'Người dùng'}</b> 
                                 </a>
                                 <ul class="dropdown-menu">
@@ -81,7 +81,7 @@
 						      </c:if>
 						      <c:if test = "${!isLogin}">
 						          <a class="profile-pic dropdown-toggle" data-toggle="dropdown" href="#"> 
-                                    <img src="plugins/images/users/default-avatar.jpg" alt="user-img" width="36" class="img-circle" />
+                                    <img src="${pageContext.request.contextPath}/plugins/images/users/default-avatar.jpg" alt="user-img" width="36" class="img-circle" />
                                     <b class="hidden-xs">Người dùng</b> 
                                 </a>
                                 <ul class="dropdown-menu">
@@ -140,7 +140,7 @@
                         <h4 class="page-title">Danh sách thành viên</h4>
                     </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 text-right">
-                        <a href="${pageContext.request.contextPath}/user-add" class="btn btn-sm btn-success">Thêm mới</a>
+                        <a href="${pageContext.request.contextPath}/users/user-add" class="btn btn-sm btn-success">Thêm mới</a>
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -170,9 +170,9 @@
 	                                            <td>${i.email }</td>
 	                                            <td>${i.role_desc }</td>
 	                                            <td>
-	                                                <a href="${pageContext.request.contextPath}/user-edit?id-edit=${i.id}" class="btn btn-sm btn-primary">Sửa</a>
-	                                                <a href="${pageContext.request.contextPath}/user-delete?id-delete=${i.id}" class="btn btn-sm btn-danger">Xóa</a>
-	                                                <a href="${pageContext.request.contextPath}/user-detail?id-user=${i.id}" class="btn btn-sm btn-info">Xem</a>
+	                                                <a href="${pageContext.request.contextPath}/users/user-edit?id-edit=${i.id}" class="btn btn-sm btn-primary">Sửa</a>
+	                                                <a href="${pageContext.request.contextPath}/users/user-delete?id-delete=${i.id}" class="btn btn-sm btn-danger">Xóa</a>
+	                                                <a href="${pageContext.request.contextPath}/users/user-detail?id-user=${i.id}" class="btn btn-sm btn-info">Xem</a>
 	                                            </td>
 	                                        </tr>
 									    </c:forEach>

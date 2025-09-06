@@ -14,7 +14,7 @@ import entity.Users;
 import services.RolesServices;
 import services.UsersServices;
 
-@WebServlet(name="AddUserController", urlPatterns = {"/user-add","/user-edit"})
+@WebServlet(name="AddUserController", urlPatterns = {"/users/user-add","/users/user-edit"})
 public class AddUserController extends HttpServlet{
 	private UsersServices usersServices = new UsersServices();
 	private RolesServices rolesServices = new RolesServices();
@@ -23,8 +23,8 @@ public class AddUserController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int isEdit = 0;
 		
-
-		if (req.getServletPath().equals("/user-edit")) {
+//		Đường dẫn /users/user-edit
+		if (req.getServletPath().equals("/users/user-edit")) {
 			isEdit=1;
 			int idEdit = 0;
 			try {
@@ -61,12 +61,15 @@ public class AddUserController extends HttpServlet{
 			System.out.println("AddUserController : " + e.getMessage());
 		}
 		
-		if (req.getServletPath().equals("/user-add")) {
+//		Đường dẫn /users/user-add
+		if (req.getServletPath().equals("/users/user-add")) {
 			if (!fullname.isEmpty() && !email.isEmpty() && !password.isEmpty() ) {
 				usersServices.addUser(fullname, email, password, phone, role);
 			}
 		}
-		if (req.getServletPath().equals("/user-edit")) {
+		
+//		Đường dẫn /users/user-edit
+		if (req.getServletPath().equals("/users/user-edit")) {
 			int idEdit = 0;
 			try {
 				idEdit = Integer.parseInt(req.getParameter("id-edit"));

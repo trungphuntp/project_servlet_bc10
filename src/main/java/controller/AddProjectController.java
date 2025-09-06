@@ -14,14 +14,15 @@ import javax.servlet.http.HttpServletResponse;
 import entity.Projects;
 import services.ProjectsServices;
 
-@WebServlet(name="AddProjectController", urlPatterns = {"/project-add", "/project-edit"})
+@WebServlet(name="AddProjectController", urlPatterns = {"/projects/project-add", "/projects/project-edit"})
 public class AddProjectController extends HttpServlet{
 	private ProjectsServices projectsServices = new ProjectsServices();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int isEdit = 0;
-		if (req.getServletPath().equals("/project-edit")) {
+//		đường dẫn /projects/project-edit
+		if (req.getServletPath().equals("/projects/project-edit")) {
 			isEdit = 1;
 			int idEdit = 0;
 			try {
@@ -31,11 +32,12 @@ public class AddProjectController extends HttpServlet{
 			}
 			
 			Projects projects = projectsServices.getProjectById(idEdit);
-		
 			
 			if (projects.getId() > 0) {
 				req.setAttribute("projects", projects);
+				
 			}
+
 		}
 		
 		req.setAttribute("isEdit", isEdit);
@@ -56,12 +58,15 @@ public class AddProjectController extends HttpServlet{
 			System.out.println("AddProjectController : " + e.getMessage());
 		}
 		
-		if (req.getServletPath().equals("/project-add")) {
+//		đường dẫn /projects/project-add
+		if (req.getServletPath().equals("/projects/project-add")) {
 			if (!nameProject.isEmpty() && !startDate.isEmpty()) {
 			projectsServices.addProject(nameProject, startDate, endDate);	
 			}
 		}
-		if (req.getServletPath().equals("/project-edit")) {
+		
+//		đường dẫn /projects/project-edit
+		if (req.getServletPath().equals("/projects/project-edit")) {
 			int idEdit = Integer.parseInt(req.getParameter("id-edit"));
 			if (!nameProject.isEmpty() && !startDate.isEmpty()) {
 				if (idEdit > 0) {
