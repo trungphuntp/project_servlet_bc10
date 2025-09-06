@@ -11,16 +11,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" type="image/png" sizes="16x16" href="../plugins/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="${pageContext.request.contextPath}/plugins/images/favicon.png">
     <title>Pixel Admin</title>
     <!-- Bootstrap Core CSS -->
     <link href="${pageContext.request.contextPath}/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Menu CSS -->
     <link href="${pageContext.request.contextPath}/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
     <!-- toast CSS -->
-    <link href="plugins/bower_components/toast-master/css/jquery.toast.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/plugins/bower_components/toast-master/css/jquery.toast.css" rel="stylesheet">
     <!-- morris CSS -->
-    <link href="plugins/bower_components/morrisjs/morris.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/plugins/bower_components/morrisjs/morris.css" rel="stylesheet">
     <!-- animation CSS -->
     <link href="${pageContext.request.contextPath}/css/animate.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -209,15 +209,15 @@
     <!--Wave Effects -->
     <script src="${pageContext.request.contextPath}/js/waves.js"></script>
     <!--Counter js -->
-    <script src="plugins/bower_components/waypoints/lib/jquery.waypoints.js"></script>
-    <script src="plugins/bower_components/counterup/jquery.counterup.min.js"></script>
+    <script src="${pageContext.request.contextPath}/plugins/bower_components/waypoints/lib/jquery.waypoints.js"></script>
+    <script src="${pageContext.request.contextPath}/plugins/bower_components/counterup/jquery.counterup.min.js"></script>
     <!--Morris JavaScript -->
-    <script src="plugins/bower_components/raphael/raphael-min.js"></script>
-    <script src="plugins/bower_components/morrisjs/morris.js"></script>
+    <script src="${pageContext.request.contextPath}/plugins/bower_components/raphael/raphael-min.js"></script>
+    <script src="${pageContext.request.contextPath}/plugins/bower_components/morrisjs/morris.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="${pageContext.request.contextPath}/js/custom.min.js"></script>
-    <script src="js/dashboard1.js"></script>
-    <script src="plugins/bower_components/toast-master/js/jquery.toast.js"></script>
+    <script src="${pageContext.request.contextPath}/js/dashboard1.js"></script>
+    <script src="${pageContext.request.contextPath}/plugins/bower_components/toast-master/js/jquery.toast.js"></script>
 </body>
 
 </html>

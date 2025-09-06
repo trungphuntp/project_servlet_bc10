@@ -14,22 +14,22 @@
       rel="icon"
       type="image/png"
       sizes="16x16"
-      href="plugins/images/favicon.png"
+      href="${pageContext.request.contextPath}/plugins/images/favicon.png"
     />
     <title>Pixel Admin</title>
     <!-- Bootstrap Core CSS -->
-    <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Menu CSS -->
     <link
-      href="plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css"
+      href="${pageContext.request.contextPath}/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css"
       rel="stylesheet"
     />
     <!-- animation CSS -->
-    <link href="css/animate.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/css/animate.css" rel="stylesheet" />
     <!-- Custom CSS -->
-    <link href="css/style.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" />
     <!-- color CSS -->
-    <link href="css/colors/blue-dark.css" id="theme" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/css/colors/blue-dark.css" id="theme" rel="stylesheet" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
