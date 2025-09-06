@@ -18,8 +18,8 @@ public class AddRoleController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {	
 		int isEdit = 0;
-//		đường dẫn /roles/role-add
-		if (req.getServletPath().equals("/roles/role-add")) {
+//		đường dẫn /roles/role-edit
+		if (req.getServletPath().equals("/roles/role-edit")) {
 			int idEdit = 0;
 			try {
 				 idEdit = Integer.parseInt(req.getParameter("id-edit"));

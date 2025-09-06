@@ -166,7 +166,8 @@
 	                                            <td>${i.desc }</td>
 	                                            <td>
 	                                                <a href="${pageContext.request.contextPath}/roles/role-edit?id-edit=${i.id}" class="btn btn-sm btn-primary">Sửa</a>
-	                                                <a href="${pageContext.request.contextPath}/roles/role-delete?delete-id=${i.id}" class="btn btn-sm btn-danger">Xóa</a>
+	                                                <a href="${pageContext.request.contextPath}/roles/role-delete?delete-id=${i.id}"
+	                                                onclick="return confirm('Bạn có chắc chắn muốn thực hiện hành vi xóa này không?')" class="btn btn-sm btn-danger">Xóa</a>
 	                                            </td>
                                          	</tr>
 									    </c:forEach>
@@ -192,7 +193,7 @@
     <!-- Menu Plugin JavaScript -->
     <script src="${pageContext.request.contextPath}/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
     <!--slimscroll JavaScript -->
-    <script src="${pageContext.request.contextPath}js/jquery.slimscroll.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.slimscroll.js"></script>
     <script src="js/jquery.dataTables.js"></script>
     <!--Wave Effects -->
     <script src="${pageContext.request.contextPath}/js/waves.js"></script>

@@ -8,8 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import entity.Projects;
 import entity.Roles;
+import entity.Tasks;
 import entity.Users;
 import services.RolesServices;
 import services.UsersServices;
@@ -22,7 +25,7 @@ public class AddUserController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int isEdit = 0;
-		
+		List<Roles> listRoles = null;
 //		Đường dẫn /users/user-edit
 		if (req.getServletPath().equals("/users/user-edit")) {
 			isEdit=1;
@@ -35,12 +38,25 @@ public class AddUserController extends HttpServlet{
 			Users users = usersServices.getUsersById(idEdit);
 			req.setAttribute("users", users);
 		}
+		
+		HttpSession session = req.getSession(false);
+		Users users = (Users) session.getAttribute("userLogin");
+		if (session != null ) {
+			if (users.getId() > 0) {
+//				ROLE ADMIN
+				if (users.getRole_id() == 1) {
+					listRoles = rolesServices.getAllRoles();
+				} else {
+					listRoles = rolesServices.getAllRolesExceptAdmin();
+				}
+
+			}
+		}
 
 		
-		List<Roles> listRoles = rolesServices.getAllRoles();
 		req.setAttribute("listRoles", listRoles);
 		req.setAttribute("isEdit", isEdit);
-		req.getRequestDispatcher("user-add.jsp").forward(req, resp);
+		req.getRequestDispatcher("/user-add.jsp").forward(req, resp);
 	}
 	
 	@Override

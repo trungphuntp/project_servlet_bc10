@@ -211,7 +211,7 @@
                                 <div class="form-group">
                                     <div class="col-sm-12">
                                         <button type="submit" class="btn btn-success">Lưu lại</button>
-                                        <a href="task.html" class="btn btn-primary">Quay lại</a>
+                                        <a href="${pageContext.request.contextPath}/tasks" class="btn btn-primary">Quay lại</a>
                                     </div>
                                 </div>
                             </form>
@@ -234,7 +234,7 @@
     <!-- Menu Plugin JavaScript -->
     <script src="${pageContext.request.contextPath}/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
     <!--slimscroll JavaScript -->
-    <script src="${pageContext.request.contextPath}js/jquery.slimscroll.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.slimscroll.js"></script>
     <!--Wave Effects -->
     <script src="${pageContext.request.contextPath}/js/waves.js"></script>
     <!-- Custom Theme JavaScript -->

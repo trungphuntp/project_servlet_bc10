@@ -168,7 +168,8 @@
                                             <td>${i.getDateDDMMYYYY(i.dateEnd) }</td>
                                             <td>
                                                 <a href="${pageContext.request.contextPath}/projects/project-edit?id-edit=${i.id}" class="btn btn-sm btn-primary">Sửa</a>
-                                                <a href="${pageContext.request.contextPath}/projects/project-delete?id-delete=${i.id}" class="btn btn-sm btn-danger">Xóa</a>
+                                                <a href="${pageContext.request.contextPath}/projects/project-delete?id-delete=${i.id}" 
+                                                onclick="return confirm('Bạn có chắc chắn muốn thực hiện hành vi xóa này không?')" class="btn btn-sm btn-danger">Xóa</a>
                                                 <a href="${pageContext.request.contextPath}/projects/project-detail?id-detail=${i.id}" class="btn btn-sm btn-info">Xem</a>
                                             </td>
                                         </tr>
@@ -194,7 +195,7 @@
     <!-- Menu Plugin JavaScript -->
     <script src="${pageContext.request.contextPath}/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
     <!--slimscroll JavaScript -->
-    <script src="${pageContext.request.contextPath}js/jquery.slimscroll.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.slimscroll.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <!--Wave Effects -->
     <script src="${pageContext.request.contextPath}/js/waves.js"></script>

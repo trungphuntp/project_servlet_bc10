@@ -51,8 +51,8 @@ public class TaskRepository {
 	public int insertTask(String nameTask, int jobId, int userId, Date startDate, Date endDate) {
 		int rowCount = 0;
 		
-		// id status = 1 => "đang thực hiện"
-		int statusId = 1;
+		// id status = 3 => "Chưa bắt đầu"
+		int statusId = 3;
 		String query = "INSERT INTO tasks( name, job_id,user_id, start_date,end_date, status_id )\r\n"
 				+ "VALUES (? , ?, ?, ?, ?,?);;";
 		

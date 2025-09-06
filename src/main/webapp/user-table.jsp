@@ -171,8 +171,10 @@
 	                                            <td>${i.role_desc }</td>
 	                                            <td>
 	                                                <a href="${pageContext.request.contextPath}/users/user-edit?id-edit=${i.id}" class="btn btn-sm btn-primary">Sửa</a>
-	                                                <a href="${pageContext.request.contextPath}/users/user-delete?id-delete=${i.id}" class="btn btn-sm btn-danger">Xóa</a>
+	                                                <a href="${pageContext.request.contextPath}/users/user-delete?id-delete=${i.id}" 
+	                                                onclick="return confirm('Bạn có chắc chắn muốn thực hiện hành vi xóa này không?')" class="btn btn-sm btn-danger">Xóa</a>
 	                                                <a href="${pageContext.request.contextPath}/users/user-detail?id-user=${i.id}" class="btn btn-sm btn-info">Xem</a>
+	                                                
 	                                            </td>
 	                                        </tr>
 									    </c:forEach>
@@ -197,7 +199,7 @@
     <!-- Menu Plugin JavaScript -->
     <script src="${pageContext.request.contextPath}/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
     <!--slimscroll JavaScript -->
-    <script src="${pageContext.request.contextPath}js/jquery.slimscroll.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.slimscroll.js"></script>
     <script src="js/jquery.dataTables.js"></script>
     <!--Wave Effects -->
     <script src="${pageContext.request.contextPath}/js/waves.js"></script>
@@ -207,7 +209,7 @@
         $(document).ready(function () {
             $('#example').DataTable();
         });
-    </script>
+    </script>    
 </body>
 
 </html>

@@ -35,6 +35,32 @@ public class RolesRepository {
 		return listRoles;
 	}
 	
+	public List<Roles> findAllRolesExceptAdmin() {
+		String query = "SELECT *\r\n"
+				+ "FROM roles r"
+				+ "WHERR r.id != 1;";
+		Connection connection = MySQLConfig.getConnection();
+		List<Roles> listRoles = new ArrayList<Roles>();
+		
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				Roles roles = new Roles();
+				roles.setId(resultSet.getInt("id"));
+				roles.setName(resultSet.getString("name"));
+				roles.setDesc(resultSet.getString("description"));
+				
+				listRoles.add(roles);
+			}
+			
+		} catch (Exception e) {
+			System.out.println("RolesRepository : " + e.getMessage());
+		}
+		return listRoles;
+	}
+	
 	public int insertRole(String name, String desc) {
 		String query = "INSERT INTO roles ( name, description) VALUES\r\n"
 				+ "( ? , ?);";

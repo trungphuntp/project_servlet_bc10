@@ -232,7 +232,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Menu Plugin JavaScript -->
     <script src="${pageContext.request.contextPath}/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
     <!--slimscroll JavaScript -->
-    <script src="${pageContext.request.contextPath}js/jquery.slimscroll.js"></script>
+    <script src="${pageContext.request.contextPath}/js/jquery.slimscroll.js"></script>
     <!--Wave Effects -->
     <script src="${pageContext.request.contextPath}/js/waves.js"></script>
     <!-- Custom Theme JavaScript -->

@@ -11,6 +11,10 @@ public class RolesServices {
 		return rolesRepository.findAllRoles();
 	}
 	
+	public List<Roles> getAllRolesExceptAdmin() {
+		return rolesRepository.findAllRolesExceptAdmin();
+	}
+	
 	public int addRole(String name, String desc) {
 		return rolesRepository.insertRole(name, desc);
 	}
