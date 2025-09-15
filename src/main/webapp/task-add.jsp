@@ -168,11 +168,14 @@
                                 <div class="form-group">
                                     <label class="col-md-12" for="project">Dự án</label>
                                     <div class="col-md-12">
-                                        <select class="form-control form-control-line" name="project" id="project">
+                                        <select class="form-control form-control-line" name="project" id="project" ${isEdit > 0 ? 'disabled' : ''}>
 	                                        <c:forEach var = "i" items="${listProjects }">
 										         <option value="${i.id }" ${i.id == taskEdit.job_id ? 'selected' : '' }>${i.name }</option>
 										    </c:forEach>
 									    </select>
+									    <c:if test="${isEdit > 0}">
+											<input type="text" name="projectId" hidden value="${taskEdit.job_id}"/>
+										</c:if>
                                     </div>
                                 </div>
                                 <div class="form-group">

@@ -36,9 +36,8 @@ public class RolesRepository {
 	}
 	
 	public List<Roles> findAllRolesExceptAdmin() {
-		String query = "SELECT *\r\n"
-				+ "FROM roles r"
-				+ "WHERR r.id != 1;";
+		String query = "SELECT * FROM roles r WHERE r.id != 1;\r\n";
+		
 		Connection connection = MySQLConfig.getConnection();
 		List<Roles> listRoles = new ArrayList<Roles>();
 		
@@ -56,7 +55,7 @@ public class RolesRepository {
 			}
 			
 		} catch (Exception e) {
-			System.out.println("RolesRepository : " + e.getMessage());
+			System.out.println("RolesRepository findAllRolesExceptAdmin : " + e.getMessage());
 		}
 		return listRoles;
 	}

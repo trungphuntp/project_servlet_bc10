@@ -162,11 +162,13 @@
                                 <div class="form-group">
                                     <label class="col-md-12" for="projectId">Tên dự án</label>
                                     <div class="col-md-12">
- 										<select class="form-control form-control-line" name="projectId" id="projectId" readonly>
+ 										<select class="form-control form-control-line"  id="projectId" readonly disabled>
                                            <c:forEach var = "i" items="${listProjects }">
                                             	<option value="${i.id }" ${tasks.job_id == i.id ? 'selected' : '' }>${i.name }</option>
 									      </c:forEach>
-                                        </select>                                    
+                                        </select>    
+                                        <input type="text" name="projectId" hidden value="${tasks.job_id}"/>
+                                                                        
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -200,7 +202,7 @@
                                 <div class="form-group">
                                     <div class="col-sm-12">
                                         <button type="submit" class="btn btn-success">Lưu lại</button>
-                                        <a href="profile.html" class="btn btn-primary">Quay lại</a>
+                                        <a href="${pageContext.request.contextPath}/profile" class="btn btn-primary">Quay lại</a>
                                     </div>
                                 </div>
                             </form>

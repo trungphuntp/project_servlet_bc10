@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS users (
     fullname VARCHAR(100) NOT NULL,
     avatar VARCHAR(100),
     role_id INT NOT NULL,
+    phone VARCHAR(30),
     PRIMARY KEY (id)
 );
 
@@ -50,33 +51,36 @@ ALTER TABLE tasks ADD FOREIGN KEY (user_id) REFERENCES users (id)  ON DELETE CAS
 ALTER TABLE tasks ADD FOREIGN KEY (job_id) REFERENCES jobs (id)  ON DELETE CASCADE;
 ALTER TABLE tasks ADD FOREIGN KEY (status_id) REFERENCES status (id)  ON DELETE CASCADE;
 
+-- Roles va Status phải đúng id như đã thiết lập
 -- Thêm roles
 INSERT INTO roles (id, name, description) VALUES
 (1, 'Admin', 'Quản trị hệ thống'),
 (2, 'Leader', 'Quản lý dự án'),
 (3, 'Employee', 'Nhân viên thực hiện');
 
--- Thêm users
-INSERT INTO users (email, password, fullname, role_id, phone) VALUES
-('admin@example.com', '123456', 'Nguyễn Văn Admin', 1, '0901111111'),
-('manager@example.com', '123456', 'Trần Thị Manager', 2, '0902222222'),
-('user1@example.com', '123456', 'Lê Văn User1', 3, '0903333333'),
-('user2@example.com', '123456', 'Phạm Thị User2', 3, '0904444444'),
-('user3@example.com', '123456', 'Hoàng Văn User3', 3, '0905555555');
-
-
--- Thêm jobs
-INSERT INTO jobs (name, start_date, end_date) VALUES
-('Dự án CRM', '2025-09-01', '2025-12-31'),
-('Website Bán Hàng', '2025-09-05', '2025-11-30'),
-('Mobile App', '2025-09-10', '2025-12-15'),
-('Hệ thống Quản lý Nhân sự', '2025-09-15', '2026-01-15');
-
 -- Thêm status
 INSERT INTO status (id, name) VALUES
 (1, 'Đang thực hiện'),
 (2, 'Hoàn thành'),
 (3, 'Chưa bắt đầu');
+
+
+-- Thêm users
+INSERT INTO users (id, email, password, fullname, role_id, phone) VALUES
+(1, 'admin@example.com', '123456', 'Nguyễn Văn Admin', 1, '0901111111'),
+(2, 'manager@example.com', '123456', 'Trần Thị Manager', 2, '0902222222'),
+(3, 'user1@example.com', '123456', 'Lê Văn User1', 3, '0903333333'),
+(4, 'user2@example.com', '123456', 'Phạm Thị User2', 3, '0904444444'),
+(5, 'user3@example.com', '123456', 'Hoàng Văn User3', 3, '0905555555');
+
+
+-- Thêm jobs
+INSERT INTO jobs (id, name, start_date, end_date) VALUES
+(1, 'Dự án CRM', '2025-09-01', '2025-12-31'),
+(2, 'Website Bán Hàng', '2025-09-05', '2025-11-30'),
+(3, 'Mobile App', '2025-09-10', '2025-12-15'),
+(4, 'Hệ thống Quản lý Nhân sự', '2025-09-15', '2026-01-15');
+
 
 -- Thêm task
 INSERT INTO tasks (name, start_date, end_date, user_id, job_id, status_id) VALUES
