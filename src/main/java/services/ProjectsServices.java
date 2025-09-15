@@ -43,4 +43,8 @@ public class ProjectsServices {
 		}
 		return projectsRepository.updateProjectById(name, startDateSql, endDateSql, id);
 	}
+	
+	public Projects getProjectByNameJob(String nameProject) {
+		return projectsRepository.findProjectByNameJob(nameProject);
+	}
 }

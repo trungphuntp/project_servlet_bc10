@@ -148,4 +148,33 @@ public class ProjectsRepository {
 		
 		return listProject;
 	}
+	
+	public Projects findProjectByNameJob(String nameProject) {
+		String query = "SELECT j.id, j.name, j.start_date, j.end_date\r\n"
+				+ "FROM jobs j\r\n"
+				+ "WHERE j.name = ?;";
+		Connection connection = MySQLConfig.getConnection();
+		Projects projects = new Projects();
+
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, nameProject);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			while (resultSet.next()) {
+				projects.setId(resultSet.getInt("id"));
+				projects.setName(resultSet.getString("name"));
+				projects.setDateStart(resultSet.getDate("start_date"));
+				projects.setDateEnd(resultSet.getDate("end_date"));
+			}
+			
+		} catch (Exception e) {
+			System.out.println("ProjectsRepository : " + e.getMessage());
+		}
+		
+		return projects;
+	}
+	
+	
+	
 }
