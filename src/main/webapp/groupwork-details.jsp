@@ -107,27 +107,41 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Left navbar-header -->
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse slimscrollsidebar">
-                 <ul class="nav" id="side-menu">
+                <ul class="nav" id="side-menu">
                     <li style="padding: 10px 0 0;">
-                        <a href="${pageContext.request.contextPath}/" class="waves-effect"><i class="fa fa-clock-o fa-fw"
+                        <a href="${pageContext.request.contextPath}/" class="waves-effect active"><i class="fa fa-clock-o fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Dashboard</span></a>
                     </li>
-                    <li>
-                        <a href="${pageContext.request.contextPath}/users" class="waves-effect"><i class="fa fa-user fa-fw"
-                                aria-hidden="true"></i><span class="hide-menu">Thành viên</span></a>
-                    </li>
-                    <li>
-                        <a href="${pageContext.request.contextPath}/roles" class="waves-effect"><i class="fa fa-modx fa-fw"
-                                aria-hidden="true"></i><span class="hide-menu">Quyền</span></a>
-                    </li>
-                    <li>
-                        <a href="${pageContext.request.contextPath}/projects" class="waves-effect active"><i class="fa fa-table fa-fw"
-                                aria-hidden="true"></i><span class="hide-menu">Dự án</span></a>
-                    </li>
-                    <li>
-                        <a href="${pageContext.request.contextPath}/tasks" class="waves-effect"><i class="fa fa-table fa-fw"
-                                aria-hidden="true"></i><span class="hide-menu">Công việc</span></a>
-                    </li>
+                    <c:if test = "${userCurrent.role_id == 1 || userCurrent.role_id == 2}">
+				          <li>
+	                        <a href="${pageContext.request.contextPath}/users" class="waves-effect"><i class="fa fa-user fa-fw"
+	                                aria-hidden="true"></i><span class="hide-menu">Thành viên</span></a>
+	                    </li>
+				     </c:if>
+                    
+                    
+                    <c:if test = "${userCurrent.role_id == 1}">
+				          <li>
+	                        <a href="${pageContext.request.contextPath}/roles" class="waves-effect"><i class="fa fa-modx fa-fw"
+	                                aria-hidden="true"></i><span class="hide-menu">Quyền</span></a>
+	                    </li>
+				     </c:if>
+				     
+                      <c:if test = "${userCurrent.role_id == 1 || userCurrent.role_id == 2}">
+				          <li>
+	                        <a href="${pageContext.request.contextPath}/projects" class="waves-effect"><i class="fa fa-table fa-fw"
+	                                aria-hidden="true"></i><span class="hide-menu">Dự án</span></a>
+	                    </li>
+				     </c:if>
+                    
+                    <c:if test = "${userCurrent.role_id == 1 || userCurrent.role_id == 2}">
+				          <li>
+	                        <a href="${pageContext.request.contextPath}/tasks" class="waves-effect"><i class="fa fa-table fa-fw"
+	                                aria-hidden="true"></i><span class="hide-menu">Công việc</span></a>
+	                    </li>
+				     </c:if>
+                    
+                    
                     <li>
                         <a href="${pageContext.request.contextPath}/blank" class="waves-effect"><i class="fa fa-columns fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Blank Page</span></a>

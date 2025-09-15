@@ -24,8 +24,8 @@ public class AllPageFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		request.setCharacterEncoding("UTF-8");
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
+		response.setCharacterEncoding("UTF-8");		
+
 
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse resp = (HttpServletResponse) response;
@@ -72,6 +72,18 @@ public class AllPageFilter implements Filter {
 		chain.doFilter(request, response);
 		return;
 		}
+		
+//		Bỏ qua file tĩnh
+		if (req.getServletPath().startsWith("/css") 
+		        || req.getServletPath().startsWith("/js") 
+		        || req.getServletPath().startsWith("/plugins") 
+		        || req.getServletPath().startsWith("/bootstrap") 
+		        || req.getServletPath().startsWith("/less") 
+		        || req.getServletPath().startsWith("/fonts")) {
+		    chain.doFilter(request, response);
+		    return;
+		}
+		
 		/**
 		 * Id Role
 		 * 1 : Admin -> Quản trị
@@ -82,7 +94,6 @@ public class AllPageFilter implements Filter {
 
 //		CHUYỂN TRANG 
 		if (user.getId() > 0 && !user.getEmail().isEmpty() && !user.getPassword().isEmpty()) {
-			
 			// NHÂN VIÊN 
 			if (user.getRole_id() == 3) {
 				if (path.startsWith("/users") || 
@@ -90,7 +101,7 @@ public class AllPageFilter implements Filter {
 						path.startsWith("/projects") ||
 						path.startsWith("/tasks"))
 				{
-					resp.sendRedirect(req.getContextPath() + "/");
+					resp.sendRedirect(req.getContextPath() + "/404");
 					return;
 				}
 			}
@@ -98,7 +109,7 @@ public class AllPageFilter implements Filter {
 			if (user.getRole_id() == 2) {
 				if (path.startsWith("/roles")) 
 				{
-					resp.sendRedirect(req.getContextPath() + "/");
+					resp.sendRedirect(req.getContextPath() + "/404");
 					return;
 				}
 
@@ -107,17 +118,11 @@ public class AllPageFilter implements Filter {
 			if (user.getRole_id() == 1) {
 				
 			}
-			
-			
-			
-			
-
 			chain.doFilter(request, response);
+			return;
 		} else {
 			resp.sendRedirect(req.getContextPath() + "/login");
 		}
-		
-		
 	}
 
 }

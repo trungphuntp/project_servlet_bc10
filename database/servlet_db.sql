@@ -100,7 +100,8 @@ INSERT INTO tasks (name, start_date, end_date, user_id, job_id, status_id) VALUE
 ('Thiết kế CSDL HRM', '2025-09-26', '2025-10-05', 3, 4, 1),
 ('Triển khai HRM', '2025-10-10', '2025-12-20', 5, 4, 1);
 
--- END INFOR
+-- Chạy database đến đây
+-- END INFOR ======================================================================================================================================
 
 
 

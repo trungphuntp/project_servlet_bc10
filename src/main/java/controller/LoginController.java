@@ -9,6 +9,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import entity.Users;
 import services.AuthenticationServices;
@@ -22,6 +23,8 @@ public class LoginController extends HttpServlet{
 		String email = "";
 		String password = "";
 		String isRemember = "";
+
+		
 		for (Cookie cookie : listCookie) {
 			if (cookie.getName().equals("email")) {
 				email = cookie.getValue();
@@ -37,7 +40,6 @@ public class LoginController extends HttpServlet{
 			req.setAttribute("email", email);
 			req.setAttribute("password", password);
 		}
-		
 		req.getRequestDispatcher("/login.jsp").forward(req, resp);
 	}
 	
@@ -61,6 +63,7 @@ public class LoginController extends HttpServlet{
 			resp.sendRedirect(req.getContextPath() + "/");
 			return;
 		}
+
 
 		resp.sendRedirect(req.getContextPath() + "/login");
 	}
