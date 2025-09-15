@@ -28,7 +28,7 @@
             </div>
              <div class="form-group">
               <label for="remember">Nhớ tài khoản</label>
-              <input type="checkbox" class="" name="remember" id="remember">
+              <input type="checkbox" class="" name="remember" id="remember" ${not empty isRemember ? 'checked' : ''}>
             </div>
             <button type="submit" class="btn btn-primary">Đăng nhập</button>
           </form>

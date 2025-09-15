@@ -34,6 +34,10 @@ public class AuthenticationServices {
 				Cookie isRemenber = new Cookie("isRemember", "yes");
 				isRemenber.setMaxAge(60 * 60);
 				resp.addCookie(isRemenber);
+			} else {
+				Cookie isRemenber = new Cookie("isRemember", "");    
+				isRemenber.setMaxAge(0);      
+		        resp.addCookie(isRemenber);
 			}
 			
 		}

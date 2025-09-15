@@ -40,6 +40,7 @@ public class LoginController extends HttpServlet{
 			req.setAttribute("email", email);
 			req.setAttribute("password", password);
 		}
+		req.setAttribute("isRemember", isRemember);
 		req.getRequestDispatcher("/login.jsp").forward(req, resp);
 	}
 	
